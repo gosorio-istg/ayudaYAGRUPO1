@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BrigadaSalud — Brigadistas</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="app-layout">
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand"><span class="material-symbols-rounded">medical_services</span> BrigadaSalud</div>
+    <nav class="sidebar-nav">
+      <a href="dashboard.html" class="sidebar-link" data-page="dashboard"><span class="material-symbols-rounded">home</span> Dashboard</a>
+      <a href="brigadas.html" class="sidebar-link" data-page="brigadas"><span class="material-symbols-rounded">groups</span> Brigadas</a>
+      <a href="pacientes.html" class="sidebar-link" data-page="pacientes"><span class="material-symbols-rounded">personal_injury</span> Pacientes</a>
+      <a href="medicos.html" class="sidebar-link" data-page="medicos"><span class="material-symbols-rounded">stethoscope</span> Médicos</a>
+      <a href="brigadistas.html" class="sidebar-link is-active" data-page="brigadistas"><span class="material-symbols-rounded">volunteer_activism</span> Brigadistas</a>
+      <a href="comunidades.html" class="sidebar-link" data-page="comunidades"><span class="material-symbols-rounded">location_city</span> Comunidades</a>
+      <a href="reportes.html" class="sidebar-link" data-page="reportes"><span class="material-symbols-rounded">bar_chart</span> Reportes</a>
+      <a href="noticias.html" class="sidebar-link" data-page="noticias"><span class="material-symbols-rounded">newspaper</span> Noticias</a>
+      <a href="configuracion.html" class="sidebar-link" data-page="configuracion"><span class="material-symbols-rounded">settings</span> Configuración</a>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="login.html" class="sidebar-link sidebar-link--logout"><span class="material-symbols-rounded">logout</span> Cerrar sesión</a>
+    </div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+  <div class="app-main">
+    <header class="topbar">
+      <button class="topbar-toggle icon-btn" id="sidebar-toggle" aria-label="Abrir menú"><span class="material-symbols-rounded">menu</span></button>
+      <div class="topbar-search"><span class="material-symbols-rounded">search</span><input type="search" placeholder="Buscar..." aria-label="Buscar"></div>
+      <div class="topbar-actions">
+        <div class="connection-status connection-status--online"><span class="connection-dot"></span> Sincronizado</div>
+        <button class="icon-btn" aria-label="Notificaciones"><span class="material-symbols-rounded">notifications</span></button>
+        <div class="avatar avatar-sm">MC</div>
+      </div>
+    </header>
+
+    <main class="page-content">
+      <header class="page-header">
+        <h1>Brigadistas</h1>
+        <p class="page-subtitle">Voluntarios asignados a cada brigada</p>
+      </header>
+
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Voluntario</th>
+              <th>Brigada</th>
+              <th>Rol</th>
+              <th>Asistencia</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><div style="display:flex;align-items:center;gap:8px"><div class="avatar avatar-sm">PV</div> Pedro Vega</div></td>
+              <td>Jornada Entrada de la 8</td>
+              <td><span class="chip chip-confirmado">Registro</span></td>
+              <td><span class="chip chip-atendido">Presente</span></td>
+            </tr>
+            <tr>
+              <td><div style="display:flex;align-items:center;gap:8px"><div class="avatar avatar-sm">SM</div> Sandra Muñoz</div></td>
+              <td>Jornada Entrada de la 8</td>
+              <td><span class="chip chip-espera">Apoyo logístico</span></td>
+              <td><span class="chip chip-atendido">Presente</span></td>
+            </tr>
+            <tr>
+              <td><div style="display:flex;align-items:center;gap:8px"><div class="avatar avatar-sm">JR</div> Jorge Rivas</div></td>
+              <td>Campaña Bastión Popular</td>
+              <td><span class="chip chip-confirmado">Registro</span></td>
+              <td><span class="chip chip-pendiente">Pendiente</span></td>
+            </tr>
+            <tr>
+              <td><div style="display:flex;align-items:center;gap:8px"><div class="avatar avatar-sm">KL</div> Karen López</div></td>
+              <td>Brigada Flor de Bastión</td>
+              <td><span class="chip chip-espera">Apoyo logístico</span></td>
+              <td><span class="chip chip-cancelado">Ausente</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script>setActiveNav('brigadistas');</script>
+</body>
+</html>

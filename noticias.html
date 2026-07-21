@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BrigadaSalud — Noticias</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="app-layout">
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand"><span class="material-symbols-rounded">medical_services</span> BrigadaSalud</div>
+    <nav class="sidebar-nav">
+      <a href="dashboard.html" class="sidebar-link" data-page="dashboard"><span class="material-symbols-rounded">home</span> Dashboard</a>
+      <a href="brigadas.html" class="sidebar-link" data-page="brigadas"><span class="material-symbols-rounded">groups</span> Brigadas</a>
+      <a href="pacientes.html" class="sidebar-link" data-page="pacientes"><span class="material-symbols-rounded">personal_injury</span> Pacientes</a>
+      <a href="medicos.html" class="sidebar-link" data-page="medicos"><span class="material-symbols-rounded">stethoscope</span> Médicos</a>
+      <a href="brigadistas.html" class="sidebar-link" data-page="brigadistas"><span class="material-symbols-rounded">volunteer_activism</span> Brigadistas</a>
+      <a href="comunidades.html" class="sidebar-link" data-page="comunidades"><span class="material-symbols-rounded">location_city</span> Comunidades</a>
+      <a href="reportes.html" class="sidebar-link" data-page="reportes"><span class="material-symbols-rounded">bar_chart</span> Reportes</a>
+      <a href="noticias.html" class="sidebar-link is-active" data-page="noticias"><span class="material-symbols-rounded">newspaper</span> Noticias</a>
+      <a href="configuracion.html" class="sidebar-link" data-page="configuracion"><span class="material-symbols-rounded">settings</span> Configuración</a>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="login.html" class="sidebar-link sidebar-link--logout"><span class="material-symbols-rounded">logout</span> Cerrar sesión</a>
+    </div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+  <div class="app-main">
+    <header class="topbar">
+      <button class="topbar-toggle icon-btn" id="sidebar-toggle" aria-label="Abrir menú"><span class="material-symbols-rounded">menu</span></button>
+      <div class="topbar-search"><span class="material-symbols-rounded">search</span><input type="search" placeholder="Buscar..." aria-label="Buscar"></div>
+      <div class="topbar-actions">
+        <div class="connection-status connection-status--online"><span class="connection-dot"></span> Sincronizado</div>
+        <button class="icon-btn" aria-label="Notificaciones"><span class="material-symbols-rounded">notifications</span></button>
+        <div class="avatar avatar-sm">MC</div>
+      </div>
+    </header>
+
+    <main class="page-content">
+      <header class="page-header flex-between">
+        <div>
+          <h1>Noticias</h1>
+          <p class="page-subtitle">Comunicados y campañas próximas</p>
+        </div>
+        <a href="noticia-form.html" class="btn btn-primary btn-sm">+ Publicar</a>
+      </header>
+
+      <div class="card-grid">
+        <article class="noticia-card">
+          <div class="noticia-card-img"><span class="material-symbols-rounded">campaign</span></div>
+          <div class="noticia-card-body">
+            <time class="noticia-card-date">18 Jul 2026</time>
+            <h3 class="noticia-card-title">Nueva jornada de vacunación infantil</h3>
+            <p class="noticia-card-desc">Se realizará el próximo sábado en el sector Entrada de la 8 con apoyo del MSP y brigadistas locales.</p>
+            <button class="btn btn-ghost btn-sm" style="margin-top:var(--space-sm)" data-modal-open="modal-noticia">Leer más</button>
+          </div>
+        </article>
+        <article class="noticia-card">
+          <div class="noticia-card-img"><span class="material-symbols-rounded">health_and_safety</span></div>
+          <div class="noticia-card-body">
+            <time class="noticia-card-date">15 Jul 2026</time>
+            <h3 class="noticia-card-title">Capacitación para brigadistas</h3>
+            <p class="noticia-card-desc">Taller de registro de pacientes y manejo offline el viernes 25 de julio en el centro comunitario.</p>
+            <button class="btn btn-ghost btn-sm" style="margin-top:var(--space-sm)" data-modal-open="modal-noticia">Leer más</button>
+          </div>
+        </article>
+        <article class="noticia-card">
+          <div class="noticia-card-img"><span class="material-symbols-rounded">medical_services</span></div>
+          <div class="noticia-card-body">
+            <time class="noticia-card-date">10 Jul 2026</time>
+            <h3 class="noticia-card-title">Campaña de salud bucal gratuita</h3>
+            <p class="noticia-card-desc">Odontología preventiva para niños y adultos mayores en Bastión Popular, 28 de julio.</p>
+            <button class="btn btn-ghost btn-sm" style="margin-top:var(--space-sm)" data-modal-open="modal-noticia">Leer más</button>
+          </div>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div class="modal-overlay" id="modal-noticia">
+    <div class="modal" role="dialog">
+      <h2 class="modal-title">Nueva jornada de vacunación infantil</h2>
+      <div class="modal-body">
+        <p style="margin-bottom:var(--space-sm)"><time>18 Jul 2026</time></p>
+        <p>El Ministerio de Salud Pública y BrigadaSalud convocan a familias del sector Entrada de la 8 a participar en la jornada de vacunación infantil programada para el sábado 26 de julio, de 8:00 a 14:00.</p>
+        <p style="margin-top:var(--space-sm)">Se aplicarán vacunas del esquema regular. Traer carnet de vacunación y documento de identidad del menor.</p>
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-primary" data-modal-close>Cerrar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script>setActiveNav('noticias');</script>
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BrigadaSalud — Pacientes</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="app-layout">
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand"><span class="material-symbols-rounded">medical_services</span> BrigadaSalud</div>
+    <nav class="sidebar-nav">
+      <a href="dashboard.html" class="sidebar-link" data-page="dashboard"><span class="material-symbols-rounded">home</span> Dashboard</a>
+      <a href="brigadas.html" class="sidebar-link" data-page="brigadas"><span class="material-symbols-rounded">groups</span> Brigadas</a>
+      <a href="pacientes.html" class="sidebar-link is-active" data-page="pacientes"><span class="material-symbols-rounded">personal_injury</span> Pacientes</a>
+      <a href="medicos.html" class="sidebar-link" data-page="medicos"><span class="material-symbols-rounded">stethoscope</span> Médicos</a>
+      <a href="brigadistas.html" class="sidebar-link" data-page="brigadistas"><span class="material-symbols-rounded">volunteer_activism</span> Brigadistas</a>
+      <a href="comunidades.html" class="sidebar-link" data-page="comunidades"><span class="material-symbols-rounded">location_city</span> Comunidades</a>
+      <a href="reportes.html" class="sidebar-link" data-page="reportes"><span class="material-symbols-rounded">bar_chart</span> Reportes</a>
+      <a href="noticias.html" class="sidebar-link" data-page="noticias"><span class="material-symbols-rounded">newspaper</span> Noticias</a>
+      <a href="configuracion.html" class="sidebar-link" data-page="configuracion"><span class="material-symbols-rounded">settings</span> Configuración</a>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="login.html" class="sidebar-link sidebar-link--logout"><span class="material-symbols-rounded">logout</span> Cerrar sesión</a>
+    </div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+  <div class="app-main">
+    <header class="topbar">
+      <button class="topbar-toggle icon-btn" id="sidebar-toggle" aria-label="Abrir menú"><span class="material-symbols-rounded">menu</span></button>
+      <div class="topbar-search"><span class="material-symbols-rounded">search</span><input type="search" placeholder="Buscar..." aria-label="Buscar"></div>
+      <div class="topbar-actions">
+        <div class="connection-status connection-status--online"><span class="connection-dot"></span> Sincronizado</div>
+        <button class="icon-btn" aria-label="Notificaciones"><span class="material-symbols-rounded">notifications</span></button>
+        <div class="avatar avatar-sm">MC</div>
+      </div>
+    </header>
+
+    <main class="page-content">
+      <header class="page-header">
+        <h1>Pacientes</h1>
+        <p class="page-subtitle">Registro y seguimiento de pacientes atendidos</p>
+      </header>
+
+      <div class="search-input-wrap" style="max-width:400px;margin-bottom:var(--space-md)">
+        <span class="material-symbols-rounded">search</span>
+        <input type="search" class="form-control" placeholder="Buscar por cédula o nombre..." aria-label="Buscar pacientes">
+      </div>
+
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Paciente</th>
+              <th>Turno</th>
+              <th>Especialidad</th>
+              <th>Estado</th>
+              <th>Hora</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr data-modal-open="modal-paciente" style="cursor:pointer">
+              <td><strong>María González</strong><br><small style="color:var(--color-text-muted)">0923456789</small></td>
+              <td>MG-024</td>
+              <td><span class="chip chip-especialidad-mg">Medicina General</span></td>
+              <td><span class="chip chip-atendido">Atendido</span></td>
+              <td>09:15</td>
+            </tr>
+            <tr data-modal-open="modal-paciente" style="cursor:pointer">
+              <td><strong>Carlos Mendoza</strong><br><small style="color:var(--color-text-muted)">0912345678</small></td>
+              <td>ODO-012</td>
+              <td><span class="chip chip-especialidad-odo">Odontología</span></td>
+              <td><span class="chip chip-pendiente">Pendiente</span></td>
+              <td>10:30</td>
+            </tr>
+            <tr data-modal-open="modal-paciente" style="cursor:pointer">
+              <td><strong>Ana Torres</strong><br><small style="color:var(--color-text-muted)">0956789012</small></td>
+              <td>PED-008</td>
+              <td><span class="chip chip-especialidad-ped">Pediatría</span></td>
+              <td><span class="chip chip-espera">En espera</span></td>
+              <td>11:00</td>
+            </tr>
+            <tr data-modal-open="modal-paciente" style="cursor:pointer">
+              <td><strong>Rosa Vélez</strong><br><small style="color:var(--color-text-muted)">0934567890</small></td>
+              <td>GIN-005</td>
+              <td><span class="chip chip-especialidad-gin">Ginecología</span></td>
+              <td><span class="chip chip-confirmado">Confirmado</span></td>
+              <td>11:45</td>
+            </tr>
+            <tr data-modal-open="modal-paciente" style="cursor:pointer">
+              <td><strong>Luis Herrera</strong><br><small style="color:var(--color-text-muted)">0901234567</small></td>
+              <td>NUT-003</td>
+              <td><span class="chip chip-especialidad-nut">Nutrición</span></td>
+              <td><span class="chip chip-cancelado">Cancelado</span></td>
+              <td>—</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="pagination">
+          <span>Mostrando 1–5 de 248 pacientes</span>
+          <div class="pagination-btns">
+            <button class="btn btn-outline btn-sm" disabled>Anterior</button>
+            <button class="btn btn-outline btn-sm">Siguiente</button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div class="modal-overlay" id="modal-paciente">
+    <div class="modal" role="dialog" aria-labelledby="paciente-title">
+      <h2 class="modal-title" id="paciente-title">Ficha del paciente</h2>
+      <div class="modal-body">
+        <div class="turno-card" style="margin-bottom:var(--space-md)">
+          <div class="turno-code">MG-024</div>
+          <p style="font-size:var(--font-size-small);color:var(--color-text-muted)">Medicina General · 3 personas registradas</p>
+          <div class="turno-qr" aria-hidden="true"></div>
+        </div>
+        <div class="detail-row"><span class="detail-label">Nombre</span><span>María González</span></div>
+        <div class="detail-row"><span class="detail-label">Cédula</span><span>0923456789</span></div>
+        <div class="detail-row"><span class="detail-label">Estado</span><span class="chip chip-atendido">Atendido</span></div>
+        <h3 style="font-size:var(--font-size-small);margin:var(--space-md) 0 var(--space-sm)">Historial de atenciones</h3>
+        <div class="detail-row"><span>15 Mar 2026 — MG</span><span class="chip chip-atendido">Atendido</span></div>
+        <div class="detail-row"><span>20 Jul 2026 — MG</span><span class="chip chip-atendido">Atendido</span></div>
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-primary" data-modal-close>Cerrar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script>
+    setActiveNav('pacientes');
+    document.querySelectorAll('[data-modal-open="modal-paciente"]').forEach(row => {
+      row.addEventListener('click', () => document.getElementById('modal-paciente').classList.add('is-open'));
+    });
+  </script>
+</body>
+</html>
