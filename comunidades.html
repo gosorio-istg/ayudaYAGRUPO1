@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BrigadaSalud — Comunidades</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="app-layout">
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand"><span class="material-symbols-rounded">medical_services</span> BrigadaSalud</div>
+    <nav class="sidebar-nav">
+      <a href="dashboard.html" class="sidebar-link" data-page="dashboard"><span class="material-symbols-rounded">home</span> Dashboard</a>
+      <a href="brigadas.html" class="sidebar-link" data-page="brigadas"><span class="material-symbols-rounded">groups</span> Brigadas</a>
+      <a href="pacientes.html" class="sidebar-link" data-page="pacientes"><span class="material-symbols-rounded">personal_injury</span> Pacientes</a>
+      <a href="medicos.html" class="sidebar-link" data-page="medicos"><span class="material-symbols-rounded">stethoscope</span> Médicos</a>
+      <a href="brigadistas.html" class="sidebar-link" data-page="brigadistas"><span class="material-symbols-rounded">volunteer_activism</span> Brigadistas</a>
+      <a href="comunidades.html" class="sidebar-link is-active" data-page="comunidades"><span class="material-symbols-rounded">location_city</span> Comunidades</a>
+      <a href="reportes.html" class="sidebar-link" data-page="reportes"><span class="material-symbols-rounded">bar_chart</span> Reportes</a>
+      <a href="noticias.html" class="sidebar-link" data-page="noticias"><span class="material-symbols-rounded">newspaper</span> Noticias</a>
+      <a href="configuracion.html" class="sidebar-link" data-page="configuracion"><span class="material-symbols-rounded">settings</span> Configuración</a>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="login.html" class="sidebar-link sidebar-link--logout"><span class="material-symbols-rounded">logout</span> Cerrar sesión</a>
+    </div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+  <div class="app-main">
+    <header class="topbar">
+      <button class="topbar-toggle icon-btn" id="sidebar-toggle" aria-label="Abrir menú"><span class="material-symbols-rounded">menu</span></button>
+      <div class="topbar-search"><span class="material-symbols-rounded">search</span><input type="search" placeholder="Buscar sectores..." aria-label="Buscar"></div>
+      <div class="topbar-actions">
+        <div class="connection-status connection-status--online"><span class="connection-dot"></span> Sincronizado</div>
+        <button class="icon-btn" aria-label="Notificaciones"><span class="material-symbols-rounded">notifications</span></button>
+        <div class="avatar avatar-sm">MC</div>
+      </div>
+    </header>
+
+    <main class="page-content">
+      <header class="page-header">
+        <h1>Comunidades</h1>
+        <p class="page-subtitle">Barrios y sectores atendidos por las brigadas</p>
+      </header>
+
+      <div class="grid-2">
+        <div class="card">
+          <h2 class="section-title">Mapa de sectores</h2>
+          <div class="map-placeholder">
+            <span class="material-symbols-rounded" style="font-size:48px;opacity:0.4;margin-right:8px">map</span>
+            Vista de mapa — Guayaquil Norte
+          </div>
+        </div>
+
+        <div class="card">
+          <h2 class="section-title">Catálogo de sectores</h2>
+          <div class="comunidad-item">
+            <div>
+              <strong>Entrada de la 8</strong>
+              <p style="font-size:var(--font-size-caption);color:var(--color-text-muted)">12 brigadas · 486 atenciones</p>
+            </div>
+            <a href="reportes.html" class="btn btn-ghost btn-sm">Ver histórico</a>
+          </div>
+          <div class="comunidad-item">
+            <div>
+              <strong>Bastión Popular</strong>
+              <p style="font-size:var(--font-size-caption);color:var(--color-text-muted)">8 brigadas · 312 atenciones</p>
+            </div>
+            <a href="reportes.html" class="btn btn-ghost btn-sm">Ver histórico</a>
+          </div>
+          <div class="comunidad-item">
+            <div>
+              <strong>Flor de Bastión</strong>
+              <p style="font-size:var(--font-size-caption);color:var(--color-text-muted)">5 brigadas · 198 atenciones</p>
+            </div>
+            <a href="reportes.html" class="btn btn-ghost btn-sm">Ver histórico</a>
+          </div>
+          <div class="comunidad-item">
+            <div>
+              <strong>Cooperativa Balerio Estacio</strong>
+              <p style="font-size:var(--font-size-caption);color:var(--color-text-muted)">6 brigadas · 252 atenciones</p>
+            </div>
+            <a href="reportes.html" class="btn btn-ghost btn-sm">Ver histórico</a>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script>setActiveNav('comunidades');</script>
+</body>
+</html>

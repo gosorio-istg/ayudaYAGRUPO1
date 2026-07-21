@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BrigadaSalud — Configuración</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="app-layout">
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand"><span class="material-symbols-rounded">medical_services</span> BrigadaSalud</div>
+    <nav class="sidebar-nav">
+      <a href="dashboard.html" class="sidebar-link" data-page="dashboard"><span class="material-symbols-rounded">home</span> Dashboard</a>
+      <a href="brigadas.html" class="sidebar-link" data-page="brigadas"><span class="material-symbols-rounded">groups</span> Brigadas</a>
+      <a href="pacientes.html" class="sidebar-link" data-page="pacientes"><span class="material-symbols-rounded">personal_injury</span> Pacientes</a>
+      <a href="medicos.html" class="sidebar-link" data-page="medicos"><span class="material-symbols-rounded">stethoscope</span> Médicos</a>
+      <a href="brigadistas.html" class="sidebar-link" data-page="brigadistas"><span class="material-symbols-rounded">volunteer_activism</span> Brigadistas</a>
+      <a href="comunidades.html" class="sidebar-link" data-page="comunidades"><span class="material-symbols-rounded">location_city</span> Comunidades</a>
+      <a href="reportes.html" class="sidebar-link" data-page="reportes"><span class="material-symbols-rounded">bar_chart</span> Reportes</a>
+      <a href="noticias.html" class="sidebar-link" data-page="noticias"><span class="material-symbols-rounded">newspaper</span> Noticias</a>
+      <a href="configuracion.html" class="sidebar-link is-active" data-page="configuracion"><span class="material-symbols-rounded">settings</span> Configuración</a>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="login.html" class="sidebar-link sidebar-link--logout"><span class="material-symbols-rounded">logout</span> Cerrar sesión</a>
+    </div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+  <div class="app-main">
+    <header class="topbar">
+      <button class="topbar-toggle icon-btn" id="sidebar-toggle" aria-label="Abrir menú"><span class="material-symbols-rounded">menu</span></button>
+      <div class="topbar-search"><span class="material-symbols-rounded">search</span><input type="search" placeholder="Buscar..." aria-label="Buscar"></div>
+      <div class="topbar-actions">
+        <div class="connection-status connection-status--offline" id="connection-badge">
+          <span class="connection-dot"></span>
+          <span id="connection-text">2 pendientes</span>
+        </div>
+        <button class="icon-btn" aria-label="Notificaciones"><span class="material-symbols-rounded">notifications</span></button>
+        <div class="avatar avatar-sm">MC</div>
+      </div>
+    </header>
+
+    <main class="page-content">
+      <header class="page-header">
+        <h1>Configuración</h1>
+        <p class="page-subtitle">Cuenta, especialidades y preferencias del coordinador</p>
+      </header>
+
+      <div class="grid-2">
+        <section class="card">
+          <h2 class="section-title">Datos de la cuenta</h2>
+          <form id="form-cuenta">
+            <div class="form-group">
+              <label class="form-label" for="nombre">Nombre</label>
+              <input type="text" id="nombre" class="form-control" value="María Coordinadora">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="correo">Correo</label>
+              <input type="email" id="correo" class="form-control" value="maria@brigadasalud.org">
+            </div>
+            <button type="submit" class="btn btn-primary btn-sm">Guardar cambios</button>
+          </form>
+        </section>
+
+        <section class="card">
+          <h2 class="section-title">Estado de sincronización</h2>
+          <p style="font-size:var(--font-size-small);color:var(--color-text-muted);margin-bottom:var(--space-md)">
+            Modo offline detectado. Hay registros pendientes de envío al servidor.
+          </p>
+          <div class="progress-label">
+            <span>Sincronización</span>
+            <span id="sync-percent">65%</span>
+          </div>
+          <div class="progress-bar-wrap" style="margin-bottom:var(--space-md)">
+            <div class="progress-bar-fill" id="sync-bar" style="width:65%"></div>
+          </div>
+          <button class="btn btn-primary btn-sm" id="btn-sync" data-modal-open="modal-sync">Sincronizar ahora</button>
+        </section>
+      </div>
+
+      <section class="card section-block" style="margin-top:var(--space-lg)">
+        <h2 class="section-title">Especialidades disponibles</h2>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:var(--space-md)">
+          <span class="chip chip-especialidad-mg">Medicina General</span>
+          <span class="chip chip-especialidad-odo">Odontología</span>
+          <span class="chip chip-especialidad-ped">Pediatría</span>
+          <span class="chip chip-especialidad-gin">Ginecología</span>
+          <span class="chip chip-especialidad-nut">Nutrición</span>
+        </div>
+        <div class="form-group" style="max-width:320px">
+          <label class="form-label" for="nueva-especialidad">Agregar especialidad</label>
+          <div style="display:flex;gap:8px">
+            <input type="text" id="nueva-especialidad" class="form-control" placeholder="Nombre">
+            <button type="button" class="btn btn-outline btn-sm" id="btn-add-esp">Agregar</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2 class="section-title">Preferencias de notificación</h2>
+        <div class="setting-row">
+          <div>
+            <strong style="font-size:var(--font-size-small)">Nuevos pacientes registrados</strong>
+            <p style="font-size:var(--font-size-caption);color:var(--color-text-muted)">Alerta cuando se registra un turno</p>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" checked>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+        <div class="setting-row">
+          <div>
+            <strong style="font-size:var(--font-size-small)">Cambios de conectividad</strong>
+            <p style="font-size:var(--font-size-caption);color:var(--color-text-muted)">Aviso al pasar a modo offline</p>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" checked>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+        <div class="setting-row">
+          <div>
+            <strong style="font-size:var(--font-size-small)">Recordatorios de brigada</strong>
+            <p style="font-size:var(--font-size-caption);color:var(--color-text-muted)">24 h antes de cada campaña</p>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal-overlay" id="modal-sync">
+    <div class="modal" role="dialog">
+      <h2 class="modal-title">¿Deseas sincronizar los datos ahora?</h2>
+      <div class="modal-body">Se enviarán 2 registros pendientes al servidor. Asegúrate de tener conexión estable.</div>
+      <div class="modal-actions">
+        <button class="btn btn-ghost" data-modal-close>Cancelar</button>
+        <button class="btn btn-primary" id="btn-confirm-sync">Confirmar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script>
+    setActiveNav('configuracion');
+    document.getElementById('form-cuenta').addEventListener('submit', e => { e.preventDefault(); showToast('Cambios guardados'); });
+    document.getElementById('btn-add-esp').addEventListener('click', () => showToast('Especialidad agregada'));
+    document.getElementById('btn-confirm-sync').addEventListener('click', () => {
+      document.getElementById('modal-sync').classList.remove('is-open');
+      const bar = document.getElementById('sync-bar');
+      const pct = document.getElementById('sync-percent');
+      bar.style.width = '100%';
+      pct.textContent = '100%';
+      document.getElementById('connection-badge').className = 'connection-status connection-status--online';
+      document.getElementById('connection-text').textContent = 'Sincronizado';
+      showToast('Datos sincronizados correctamente');
+    });
+  </script>
+</body>
+</html>
