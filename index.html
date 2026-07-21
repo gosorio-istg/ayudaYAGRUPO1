@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Guía de Estilo Viva y Design System de la plataforma AyudaYa.">
+  <title>AyudaYa — Guía de Estilo Viva 3C</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* Estilos locales para organizar la guía de estilo, no afectan a los componentes */
+    body {
+      padding-bottom: 40px;
+      /* Restablecer para la guía */
+    }
+
+    @media (min-width: 768px) {
+      body {
+        padding-top: 40px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="container">
+    <header class="sg-header">
+      <div class="brand-logo" style="justify-content: flex-start; margin-bottom: var(--space-xs);">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"
+          style="color: var(--color-secondary);">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+        </svg>
+        <span class="brand-name" style="font-size: 1.75rem; color: var(--color-primary);">AyudaYa</span>
+      </div>
+      <h1 style="font-size: var(--font-size-title); margin-top: var(--space-xs);">Guía de Estilo Viva</h1>
+      <p class="sg-subtitle">Fuente de verdad del sistema de diseño para AyudaYa. Muestra los tokens de diseño y los
+        componentes principales.</p>
+
+      <div style="margin-top: var(--space-md);">
+        <h2 style="font-size: var(--font-size-body); margin-bottom: var(--space-sm); font-weight: 600;">Acceso Directo a
+          Pantallas del Prototipo:</h2>
+        <div class="screen-links-grid">
+          <a href="login.html" class="screen-link-card" id="link-login">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+              <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M13.8 12H3" />
+            </svg>
+            <span>Pantalla de Login</span>
+          </a>
+          <a href="reportes.html" class="screen-link-card" id="link-reportes">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+              <line x1="8" y1="6" x2="21" y2="6"></line>
+              <line x1="8" y1="12" x2="21" y2="12"></line>
+              <line x1="8" y1="18" x2="21" y2="18"></line>
+              <line x1="3" y1="6" x2="3.01" y2="6"></line>
+              <line x1="3" y1="12" x2="3.01" y2="12"></line>
+              <line x1="3" y1="18" x2="3.01" y2="18"></line>
+            </svg>
+            <span>Listado de Reportes</span>
+          </a>
+          <a href="crear-reporte.html" class="screen-link-card" id="link-crear">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="8" x2="12" y2="16"></line>
+              <line x1="8" y1="12" x2="16" y2="12"></line>
+            </svg>
+            <span>Crear Reporte</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- SECTION 1: DESIGN TOKENS -->
+    <section class="sg-section">
+      <h2 class="sg-section-title">1. Design Tokens</h2>
+
+      <!-- Colors -->
+      <div style="margin-bottom: var(--space-lg);">
+        <h3 style="font-size: var(--font-size-body); margin-bottom: var(--space-sm);">Paleta de Colores</h3>
+        <div class="sg-colors">
+          <div class="sg-color-swatch">
+            <div class="sg-color-preview" style="background-color: var(--color-primary);"></div>
+            <div class="sg-color-info">
+              <span class="sg-color-name">Primary</span>
+              <span class="sg-color-value">#0a369d</span>
+            </div>
+          </div>
+          <div class="sg-color-swatch">
+            <div class="sg-color-preview" style="background-color: var(--color-secondary);"></div>
+            <div class="sg-color-info">
+              <span class="sg-color-name">Secondary</span>
+              <span class="sg-color-value">#ff6b35</span>
+            </div>
+          </div>
+          <div class="sg-color-swatch">
+            <div class="sg-color-preview" style="background-color: var(--color-success);"></div>
+            <div class="sg-color-info">
+              <span class="sg-color-name">Success</span>
+              <span class="sg-color-value">#2ec4b6</span>
+            </div>
+          </div>
+          <div class="sg-color-swatch">
+            <div class="sg-color-preview" style="background-color: var(--color-warning);"></div>
+            <div class="sg-color-info">
+              <span class="sg-color-name">Warning</span>
+              <span class="sg-color-value">#ffbf00</span>
+            </div>
+          </div>
+          <div class="sg-color-swatch">
+            <div class="sg-color-preview" style="background-color: var(--color-danger);"></div>
+            <div class="sg-color-info">
+              <span class="sg-color-name">Danger</span>
+              <span class="sg-color-value">#e71d36</span>
+            </div>
+          </div>
+          <div class="sg-color-swatch">
+            <div class="sg-color-preview" style="background-color: var(--color-background);"></div>
+            <div class="sg-color-info">
+              <span class="sg-color-name">Background</span>
+              <span class="sg-color-value">#f4f7f6</span>
+            </div>
+          </div>
+          <div class="sg-color-swatch">
+            <div class="sg-color-preview" style="background-color: var(--color-text-main);"></div>
+            <div class="sg-color-info">
+              <span class="sg-color-name">Text Main</span>
+              <span class="sg-color-value">#1d2a3a</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Typography -->
+      <div style="margin-bottom: var(--space-lg);">
+        <h3 style="font-size: var(--font-size-body); margin-bottom: var(--space-sm);">Escala Tipográfica</h3>
+        <div class="sg-font-row">
+          <span style="font-size: var(--font-size-small); color: var(--color-text-muted);">--font-size-title (1.75rem /
+            28px)</span>
+          <span style="font-size: var(--font-size-title); font-weight: 700;">Título de Pantalla</span>
+        </div>
+        <div class="sg-font-row">
+          <span style="font-size: var(--font-size-small); color: var(--color-text-muted);">--font-size-subtitle (1.25rem
+            / 20px)</span>
+          <span style="font-size: var(--font-size-subtitle); font-weight: 700;">Subtítulo o Título de Card</span>
+        </div>
+        <div class="sg-font-row">
+          <span style="font-size: var(--font-size-small); color: var(--color-text-muted);">--font-size-body (1rem /
+            16px)</span>
+          <span style="font-size: var(--font-size-body);">Cuerpo de texto de ejemplo para descripciones de reportes y
+            lecturas de usuario.</span>
+        </div>
+        <div class="sg-font-row">
+          <span style="font-size: var(--font-size-small); color: var(--color-text-muted);">--font-size-caption (0.875rem
+            / 14px)</span>
+          <span style="font-size: var(--font-size-caption);">Etiqueta / Leyenda secundaria descriptiva</span>
+        </div>
+      </div>
+
+      <!-- Spacing -->
+      <div>
+        <h3 style="font-size: var(--font-size-body); margin-bottom: var(--space-sm);">Espaciados y Bordes</h3>
+        <div style="display: flex; gap: var(--space-md); align-items: flex-end;">
+          <div style="text-align: center;">
+            <div style="width: 24px; height: 4px; background-color: var(--color-primary); margin: 0 auto 4px auto;">
+            </div>
+            <span style="font-size: var(--font-size-small); color: var(--color-text-muted);">xs (4px)</span>
+          </div>
+          <div style="text-align: center;">
+            <div style="width: 24px; height: 8px; background-color: var(--color-primary); margin: 0 auto 4px auto;">
+            </div>
+            <span style="font-size: var(--font-size-small); color: var(--color-text-muted);">sm (8px)</span>
+          </div>
+          <div style="text-align: center;">
+            <div style="width: 24px; height: 16px; background-color: var(--color-primary); margin: 0 auto 4px auto;">
+            </div>
+            <span style="font-size: var(--font-size-small); color: var(--color-text-muted);">md (16px)</span>
+          </div>
+          <div style="text-align: center;">
+            <div style="width: 24px; height: 24px; background-color: var(--color-primary); margin: 0 auto 4px auto;">
+            </div>
+            <span style="font-size: var(--font-size-small); color: var(--color-text-muted);">lg (24px)</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: CORE COMPONENTS -->
+    <section class="sg-section">
+      <h2 class="sg-section-title">2. Componentes Core</h2>
+
+      <!-- 1. Buttons -->
+      <div style="margin-bottom: var(--space-lg);">
+        <h3 style="font-size: var(--font-size-body); margin-bottom: var(--space-sm);">1. Botón (Variantes y Estados)
+        </h3>
+        <div class="sg-grid-2">
+          <div>
+            <span
+              style="font-size: var(--font-size-caption); color: var(--color-text-muted); display:block; margin-bottom: 4px;">Botón
+              Primario</span>
+            <button class="btn btn-primary">Ingresar / Guardar</button>
+          </div>
+          <div>
+            <span
+              style="font-size: var(--font-size-caption); color: var(--color-text-muted); display:block; margin-bottom: 4px;">Botón
+              Secundario</span>
+            <button class="btn btn-secondary">Crear cuenta / Cancelar</button>
+          </div>
+          <div style="grid-column: 1 / -1;">
+            <span
+              style="font-size: var(--font-size-caption); color: var(--color-text-muted); display:block; margin-bottom: 4px;">Botón
+              Deshabilitado</span>
+            <button class="btn btn-primary" disabled>Acción no disponible</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Inputs -->
+      <div style="margin-bottom: var(--space-lg);">
+        <h3 style="font-size: var(--font-size-body); margin-bottom: var(--space-sm);">2. Inputs de Texto (Normal y
+          Error)</h3>
+        <div class="sg-grid-2">
+          <!-- Normal State -->
+          <div class="form-group">
+            <label class="form-label" for="input-normal">
+              Nombre de usuario
+            </label>
+            <input type="text" id="input-normal" class="form-control" placeholder="Ej. JuanPerez">
+          </div>
+
+          <!-- Error State -->
+          <div class="form-group has-error">
+            <label class="form-label" for="input-error">
+              Contraseña
+            </label>
+            <input type="password" id="input-error" class="form-control" value="123">
+            <span class="form-error-msg">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+              </svg>
+              La contraseña debe tener al menos 6 caracteres.
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Badges -->
+      <div style="margin-bottom: var(--space-lg);">
+        <h3 style="font-size: var(--font-size-body); margin-bottom: var(--space-sm);">3. Badges (Estados y Categorías)
+        </h3>
+        <div style="display: flex; flex-direction: column; gap: var(--space-md);">
+          <div>
+            <span
+              style="font-size: var(--font-size-caption); color: var(--color-text-muted); display:block; margin-bottom: 4px;">Estados
+              de Reporte:</span>
+            <div class="sg-flex-wrap">
+              <span class="badge badge-pendiente">Pendiente</span>
+              <span class="badge badge-en-proceso">En proceso</span>
+              <span class="badge badge-resuelto">Resuelto</span>
+            </div>
+          </div>
+          <div>
+            <span
+              style="font-size: var(--font-size-caption); color: var(--color-text-muted); display:block; margin-bottom: 4px;">Categorías
+              de Reporte:</span>
+            <div class="sg-flex-wrap">
+              <span class="badge badge-categoria badge-bache">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                  style="margin-right: 4px;">
+                  <path
+                    d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z">
+                  </path>
+                </svg>
+                Bache
+              </span>
+              <span class="badge badge-categoria badge-alumbrado">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                  style="margin-right: 4px;">
+                  <path
+                    d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A7 7 0 0 0 4 8c0 1.3.5 2.6 1.5 3.5.8.8 1.3 1.5 1.5 2.5">
+                  </path>
+                  <path d="M9 18h6"></path>
+                  <path d="M10 22h4"></path>
+                </svg>
+                Alumbrado
+              </span>
+              <span class="badge badge-categoria badge-inseguridad">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                  style="margin-right: 4px;">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+                Inseguridad
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. Report Card -->
+      <div style="margin-bottom: var(--space-lg);">
+        <h3 style="font-size: var(--font-size-body); margin-bottom: var(--space-sm);">4. Card de Reporte</h3>
+        <div style="max-width: 450px;">
+          <article class="report-card">
+            <div class="report-card-header">
+              <div class="report-card-badges">
+                <span class="badge badge-categoria badge-inseguridad">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                    style="margin-right: 4px;">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                  </svg>
+                  Inseguridad
+                </span>
+                <span class="badge badge-pendiente">Pendiente</span>
+              </div>
+              <span class="report-card-date">Hace 2 horas</span>
+            </div>
+            <h4 class="report-card-title">Falta de luminarias en el parque central</h4>
+            <p class="report-card-desc">El sector se encuentra completamente a oscuras desde hace tres semanas, lo que
+              fomenta robos en la esquina del colegio.</p>
+            <div class="report-card-location">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+              <span>Cooperativa Balerio Estacio, Mz 45</span>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- 5. Navbar -->
+      <div>
+        <h3 style="font-size: var(--font-size-body); margin-bottom: var(--space-sm);">5. Navbar / Barra de Navegación
+          (Mobile / Desktop)</h3>
+        <p style="font-size: var(--font-size-caption); color: var(--color-text-muted); margin-bottom: var(--space-sm);">
+          En pantallas móviles se fija en la parte inferior; en escritorio se transforma en una barra de navegación
+          superior clásica.</p>
+
+        <div class="sg-nav-container">
+          <nav class="navbar">
+            <a href="reportes.html" class="navbar-item is-active">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                <line x1="8" y1="6" x2="21" y2="6"></line>
+                <line x1="8" y1="12" x2="21" y2="12"></line>
+                <line x1="8" y1="18" x2="21" y2="18"></line>
+                <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                <line x1="3" y1="18" x2="3.01" y2="18"></line>
+              </svg>
+              <span>Reportes</span>
+            </a>
+            <a href="crear-reporte.html" class="navbar-item">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="16"></line>
+                <line x1="8" y1="12" x2="16" y2="12"></line>
+              </svg>
+              <span>Nuevo Reporte</span>
+            </a>
+            <a href="login.html" class="navbar-item">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                <polyline points="16 17 21 12 16 7"></polyline>
+                <line x1="21" y1="12" x2="9" y2="12"></line>
+              </svg>
+              <span>Salir</span>
+            </a>
+          </nav>
+        </div>
+      </div>
+    </section>
+  </main>
+
+</body>
+
+</html>

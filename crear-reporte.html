@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Formulario para crear un nuevo reporte de necesidades comunitarias en AyudaYa.">
+  <title>AyudaYa — Crear Reporte</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* Estilos adicionales para la pantalla de creación */
+    .create-header {
+      margin-bottom: var(--space-md);
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .btn-back {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-md);
+      background-color: var(--color-surface);
+      border: 1px solid var(--color-border);
+      color: var(--color-text-main);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .btn-back:hover {
+      background-color: var(--color-primary-light);
+      color: var(--color-primary);
+      border-color: var(--color-primary);
+    }
+
+    .form-card {
+      background-color: var(--color-surface);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--color-border);
+      padding: var(--space-md);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: var(--space-xl);
+    }
+
+    textarea.form-control {
+      min-height: 100px;
+      resize: vertical;
+      padding-top: var(--space-sm);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Alerta flotante para simulación -->
+  <div id="toast-msg" class="toast toast-success">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+      <polyline points="22 4 12 14.01 9 11.01"></polyline>
+    </svg>
+    <span id="toast-text">Ubicación capturada con éxito.</span>
+  </div>
+
+  <!-- Barra de Navegación -->
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-secondary);">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+      </svg>
+      <span>AyudaYa</span>
+    </div>
+    
+    <div class="navbar-menu" style="display: flex; width: 100%;">
+      <a href="reportes.html" class="navbar-item" id="nav-reports">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+          <line x1="8" y1="6" x2="21" y2="6"></line>
+          <line x1="8" y1="12" x2="21" y2="12"></line>
+          <line x1="8" y1="18" x2="21" y2="18"></line>
+          <line x1="3" y1="6" x2="3.01" y2="6"></line>
+          <line x1="3" y1="12" x2="3.01" y2="12"></line>
+          <line x1="3" y1="18" x2="3.01" y2="18"></line>
+        </svg>
+        <span>Reportes</span>
+      </a>
+      <a href="crear-reporte.html" class="navbar-item is-active" id="nav-new-report">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="16"></line>
+          <line x1="8" y1="12" x2="16" y2="12"></line>
+        </svg>
+        <span>Nuevo</span>
+      </a>
+      <a href="index.html" class="navbar-item" id="nav-style-guide">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+          <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+        </svg>
+        <span>Guía</span>
+      </a>
+      <a href="login.html" class="navbar-item" id="nav-logout">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+          <polyline points="16 17 21 12 16 7"></polyline>
+          <line x1="21" y1="12" x2="9" y2="12"></line>
+        </svg>
+        <span>Salir</span>
+      </a>
+    </div>
+  </nav>
+
+  <main class="container">
+    
+    <!-- Cabecera de Creación -->
+    <header class="create-header">
+      <a href="reportes.html" class="btn-back" title="Volver al listado" id="btn-back-link">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+      </a>
+      <div>
+        <h1 style="font-size: 1.5rem;">Nuevo Reporte</h1>
+        <p style="font-size: var(--font-size-caption); color: var(--color-text-muted);">Registra una necesidad de tu comunidad</p>
+      </div>
+    </header>
+
+    <!-- Tarjeta del Formulario -->
+    <section class="form-card">
+      <form id="report-form" novalidate>
+        
+        <!-- Campo Título -->
+        <div class="form-group" id="group-title">
+          <label class="form-label" for="report-title">¿Cuál es el problema? (Título)</label>
+          <input type="text" id="report-title" class="form-control" placeholder="Ej. Fuga de agua en vereda principal" required>
+          <span class="form-error-msg" style="display: none;" id="error-title">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="8" x2="12" y2="12"></line>
+              <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+            Ingresa un título descriptivo breve.
+          </span>
+        </div>
+
+        <!-- Campo Categoría -->
+        <div class="form-group" id="group-category">
+          <label class="form-label" for="report-category">Categoría del problema</label>
+          <select id="report-category" class="form-control" required>
+            <option value="" disabled selected>Selecciona una categoría...</option>
+            <option value="bache">Bache (Vías y calles)</option>
+            <option value="alumbrado">Alumbrado público</option>
+            <option value="inseguridad">Inseguridad ciudadana</option>
+          </select>
+          <span class="form-error-msg" style="display: none;" id="error-category">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="8" x2="12" y2="12"></line>
+              <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+            Selecciona una categoría válida de la lista.
+          </span>
+        </div>
+
+        <!-- Campo Descripción -->
+        <div class="form-group" id="group-desc">
+          <label class="form-label" for="report-desc">Describe los detalles de la situación</label>
+          <textarea id="report-desc" class="form-control" placeholder="Ej. El agua brota constantemente desde esta mañana, impidiendo el paso peatonal y socavando la vereda..." required></textarea>
+          <span class="form-error-msg" style="display: none;" id="error-desc">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="8" x2="12" y2="12"></line>
+              <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+            Describe el problema con suficiente detalle para que pueda ser atendido.
+          </span>
+        </div>
+
+        <!-- Placeholder Foto -->
+        <div class="form-group">
+          <label class="form-label">Adjuntar Foto (Opcional)</label>
+          <div class="media-placeholder" id="photo-placeholder" aria-label="Zona para adjuntar foto">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" id="photo-icon">
+              <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+              <circle cx="12" cy="13" r="4"></circle>
+            </svg>
+            <span id="photo-text" style="font-weight: 500;">Toca para tomar o subir una foto</span>
+            <span style="font-size: var(--font-size-small); opacity: 0.8;">Ayuda a los inspectores a ver el estado real</span>
+          </div>
+        </div>
+
+        <!-- Placeholder Ubicación en Mapa -->
+        <div class="form-group" style="margin-bottom: var(--space-lg);">
+          <label class="form-label">Ubicación en el Mapa</label>
+          <div class="map-placeholder" id="map-area" aria-label="Mapa simulado">
+            <!-- Icono de Pin de Google Maps -->
+            <div class="map-pin">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+              </svg>
+            </div>
+            <!-- Estilo abstracto de calles -->
+            <div style="width: 100%; height: 2px; background-color: var(--color-surface); position: absolute; top: 40%;"></div>
+            <div style="width: 100%; height: 2px; background-color: var(--color-surface); position: absolute; top: 70%;"></div>
+            <div style="width: 2px; height: 100%; background-color: var(--color-surface); position: absolute; left: 30%;"></div>
+            <div style="width: 2px; height: 100%; background-color: var(--color-surface); position: absolute; left: 75%;"></div>
+            
+            <div class="map-label" id="map-label-text">Buscando ubicación GPS...</div>
+          </div>
+          <button type="button" class="btn btn-secondary" id="btn-gps" style="min-height: 40px; margin-top: var(--space-sm); font-size: var(--font-size-caption);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px;">
+              <polygon points="3 11 22 2 13 21 11 13 3 11"></polygon>
+            </svg>
+            Capturar mi Ubicación GPS
+          </button>
+        </div>
+
+        <!-- Botón de envío -->
+        <button type="submit" class="btn btn-primary" id="btn-submit-report">Enviar reporte</button>
+
+      </form>
+    </section>
+
+  </main>
+
+  <script>
+    // Simular detección GPS automática al cargar la página
+    window.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        const mapLabel = document.getElementById('map-label-text');
+        mapLabel.textContent = 'Guayaquil: Av. Casuarina (Tu ubicación actual detectada)';
+      }, 1500);
+    });
+
+    // Simular botón GPS
+    document.getElementById('btn-gps').addEventListener('click', () => {
+      const toast = document.getElementById('toast-msg');
+      const toastText = document.getElementById('toast-text');
+      const mapLabel = document.getElementById('map-label-text');
+      
+      mapLabel.textContent = 'Coordenadas: -2.1485, -79.9642 (GPS Fijado)';
+      toastText.textContent = 'Ubicación GPS capturada con precisión.';
+      toast.classList.add('show');
+      
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2000);
+    });
+
+    // Simular adjuntar foto
+    const photoPlaceholder = document.getElementById('photo-placeholder');
+    const photoText = document.getElementById('photo-text');
+    const photoIcon = document.getElementById('photo-icon');
+    
+    photoPlaceholder.addEventListener('click', () => {
+      const toast = document.getElementById('toast-msg');
+      const toastText = document.getElementById('toast-text');
+      
+      // Simular cambio visual al tener foto
+      photoPlaceholder.style.backgroundColor = 'var(--color-success-light)';
+      photoPlaceholder.style.borderColor = 'var(--color-success)';
+      photoPlaceholder.style.color = 'var(--color-success-hover)';
+      photoText.textContent = '¡Foto adjuntada! (reporte-imagen-023.jpg)';
+      
+      toastText.textContent = 'Cámara activada: Foto adjuntada con éxito.';
+      toast.classList.add('show');
+      
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2000);
+    });
+
+    // Validación del formulario
+    document.getElementById('report-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+      
+      const titleField = document.getElementById('report-title');
+      const categoryField = document.getElementById('report-category');
+      const descField = document.getElementById('report-desc');
+      
+      const groupTitle = document.getElementById('group-title');
+      const groupCategory = document.getElementById('group-category');
+      const groupDesc = document.getElementById('group-desc');
+      
+      const errorTitle = document.getElementById('error-title');
+      const errorCategory = document.getElementById('error-category');
+      const errorDesc = document.getElementById('error-desc');
+      
+      let isValid = true;
+      
+      // Título
+      if (!titleField.value.trim()) {
+        groupTitle.classList.add('has-error');
+        errorTitle.style.display = 'flex';
+        isValid = false;
+      } else {
+        groupTitle.classList.remove('has-error');
+        errorTitle.style.display = 'none';
+      }
+      
+      // Categoría
+      if (!categoryField.value) {
+        groupCategory.classList.add('has-error');
+        errorCategory.style.display = 'flex';
+        isValid = false;
+      } else {
+        groupCategory.classList.remove('has-error');
+        errorCategory.style.display = 'none';
+      }
+      
+      // Descripción
+      if (!descField.value.trim()) {
+        groupDesc.classList.add('has-error');
+        errorDesc.style.display = 'flex';
+        isValid = false;
+      } else {
+        groupDesc.classList.remove('has-error');
+        errorDesc.style.display = 'none';
+      }
+      
+      if (isValid) {
+        // Redirigir al listado con parámetro de éxito
+        window.location.href = 'reportes.html?created=true';
+      }
+    });
+  </script>
+</body>
+</html>
