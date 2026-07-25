@@ -5,6 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BrigadaSalud — Configuración</title>
   <link rel="stylesheet" href="css/styles.css">
+  <!-- Efecto bacán de elevación para las tarjetas -->
+  <style>
+    .card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+    }
+  </style>
 </head>
 <body class="app-layout">
 
@@ -24,6 +34,9 @@
     <div class="sidebar-footer">
       <a href="login.html" class="sidebar-link sidebar-link--logout"><span class="material-symbols-rounded">logout</span> Cerrar sesión</a>
     </div>
+    <a href="perfil.html" style="display: flex; align-items: center; text-decoration: none;">
+  <div class="avatar avatar-sm">MC</div>
+</a>
   </aside>
   <div class="sidebar-overlay" id="sidebar-overlay"></div>
 
@@ -46,6 +59,23 @@
         <h1>Configuración</h1>
         <p class="page-subtitle">Cuenta, especialidades y preferencias del coordinador</p>
       </header>
+
+      </header>
+
+      <!-- Inicio Tarjeta de Perfil Visual -->
+      <section class="card" style="margin-bottom: var(--space-lg); display: flex; align-items: center; gap: 20px;">
+          <div style="width: 80px; height: 80px; border-radius: 50%; background-color: #0d6efd; color: white; display: flex; align-items: center; justify-content: center; font-size: 32px; font-weight: bold; flex-shrink: 0;">
+              MC
+          </div>
+          <div>
+              <h2 style="margin: 0; font-size: 24px; color: #333;">María Coordinadora</h2>
+              <p style="margin: 5px 0 0 0; color: #6c757d; font-size: 15px;">
+                  <span class="material-symbols-rounded" style="font-size: 16px; vertical-align: text-bottom;">admin_panel_settings</span>
+                  Administrador Principal
+              </p>
+          </div>
+      </section>
+      <!-- Fin Tarjeta de Perfil Visual -->
 
       <div class="grid-2">
         <section class="card">
@@ -131,6 +161,22 @@
         </div>
       </section>
     </main>
+    <!-- Inicio Opciones Avanzadas -->
+      <section class="card section-block" style="margin-top: var(--space-lg); border-left: 4px solid #dc3545;">
+        <h2 class="section-title" style="color: #dc3545;">Opciones Avanzadas</h2>
+        <p style="font-size: 14px; color: #6c757d; margin-bottom: 15px;">Acciones sensibles. Procede con precaución.</p>
+        <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+            <button type="button" class="btn btn-outline btn-sm" style="color: #dc3545; border-color: #dc3545;" onclick="alert('Esta función estará disponible próximamente.')">
+                <span class="material-symbols-rounded" style="font-size: 18px; vertical-align: text-bottom; margin-right: 4px;">delete_forever</span>
+                Limpiar datos locales
+            </button>
+            <button type="button" class="btn btn-outline btn-sm" onclick="alert('Iniciando descarga de respaldo...')">
+                <span class="material-symbols-rounded" style="font-size: 18px; vertical-align: text-bottom; margin-right: 4px;">download</span>
+                Exportar respaldo
+            </button>
+        </div>
+      </section>
+      <!-- Fin Opciones Avanzadas -->
   </div>
 
   <div class="modal-overlay" id="modal-sync">

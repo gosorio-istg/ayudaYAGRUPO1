@@ -1216,3 +1216,48 @@ select.form-control {
   font-size: 32px;
   color: var(--color-primary);
 }
+/* ==========================================
+   AJUSTES RESPONSIVE EXTRA (CELULARES)
+   ========================================== */
+@media (max-width: 768px) {
+  /* 1. Dar más espacio en la pantalla reduciendo los bordes laterales */
+  .page-content {
+    padding: var(--space-sm);
+  }
+
+  /* 2. Evitar que la barra superior empuje los íconos fuera de la pantalla */
+  .topbar {
+    padding: 0 var(--space-sm);
+    gap: var(--space-sm);
+  }
+  .topbar-search {
+    max-width: 140px; 
+  }
+
+  /* 3. Centrar y apilar la tarjeta del perfil */
+  .card[style*="display: flex"] {
+    flex-direction: column;
+    text-align: center;
+    gap: 12px !important;
+  }
+
+  /* 4. Ajustar el input de 'Agregar especialidad' al 100% */
+  .form-group[style*="max-width:320px"] {
+    max-width: 100% !important;
+  }
+  .form-group > div[style*="display:flex"] {
+    flex-direction: column;
+  }
+  .form-group > div[style*="display:flex"] .btn {
+    width: 100%;
+  }
+
+  /* 5. Los botones de opciones avanzadas apilados y anchos para ser fáciles de tocar */
+  .section-block[style*="border-left"] div[style*="display: flex"] {
+    flex-direction: column;
+  }
+  .section-block[style*="border-left"] .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
