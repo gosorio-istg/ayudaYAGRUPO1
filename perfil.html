@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BrigadaSalud — Mi Perfil</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* Efecto de elevación para las tarjetas */
+    .card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+    }
+    /* Estilo para la zona de avatar en edición */
+    .profile-avatar-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-sm);
+      text-align: center;
+    }
+  </style>
+</head>
+<body class="app-layout">
+
+  <!-- MENÚ LATERAL -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand"><span class="material-symbols-rounded">medical_services</span> BrigadaSalud</div>
+    <nav class="sidebar-nav">
+      <a href="dashboard.html" class="sidebar-link" data-page="dashboard"><span class="material-symbols-rounded">home</span> Dashboard</a>
+      <a href="brigadas.html" class="sidebar-link" data-page="brigadas"><span class="material-symbols-rounded">groups</span> Brigadas</a>
+      <a href="pacientes.html" class="sidebar-link" data-page="pacientes"><span class="material-symbols-rounded">personal_injury</span> Pacientes</a>
+      <a href="medicos.html" class="sidebar-link" data-page="medicos"><span class="material-symbols-rounded">stethoscope</span> Médicos</a>
+      <a href="brigadistas.html" class="sidebar-link" data-page="brigadistas"><span class="material-symbols-rounded">volunteer_activism</span> Brigadistas</a>
+      <a href="comunidades.html" class="sidebar-link" data-page="comunidades"><span class="material-symbols-rounded">location_city</span> Comunidades</a>
+      <a href="reportes.html" class="sidebar-link" data-page="reportes"><span class="material-symbols-rounded">bar_chart</span> Reportes</a>
+      <a href="noticias.html" class="sidebar-link" data-page="noticias"><span class="material-symbols-rounded">newspaper</span> Noticias</a>
+      <a href="configuracion.html" class="sidebar-link" data-page="configuracion"><span class="material-symbols-rounded">settings</span> Configuración</a>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="login.html" class="sidebar-link sidebar-link--logout"><span class="material-symbols-rounded">logout</span> Cerrar sesión</a>
+    </div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <div class="app-main">
+    <header class="topbar">
+      <button class="topbar-toggle icon-btn" id="sidebar-toggle" aria-label="Abrir menú"><span class="material-symbols-rounded">menu</span></button>
+      <div class="topbar-search"><span class="material-symbols-rounded">search</span><input type="search" placeholder="Buscar..." aria-label="Buscar"></div>
+      <div class="topbar-actions">
+        <div class="connection-status connection-status--online" id="connection-badge">
+          <span class="connection-dot"></span>
+          <span id="connection-text">Sincronizado</span>
+        </div>
+        <button class="icon-btn" aria-label="Notificaciones"><span class="material-symbols-rounded">notifications</span></button>
+        <a href="perfil.html" style="display: flex; align-items: center; text-decoration: none;">
+          <div class="avatar avatar-sm" style="border: 2px solid var(--color-primary);">MC</div>
+        </a>
+      </div>
+    </header>
+
+    <main class="page-content">
+      <header class="page-header">
+        <h1>Mi Perfil</h1>
+        <p class="page-subtitle">Gestiona tu información personal, fotografía y credenciales de acceso</p>
+      </header>
+
+      <div class="grid-2">
+        <!-- Tarjeta Izquierda: Foto de Perfil y Datos Básicos -->
+        <section class="card profile-avatar-wrapper" style="justify-content: center; padding: var(--space-xl);">
+          <div class="avatar avatar-lg" style="width: 120px; height: 120px; font-size: 48px; background-color: var(--color-primary); color: white;">
+            MC
+          </div>
+          <div>
+            <h2 style="margin: var(--space-sm) 0 var(--space-xs); font-size: 22px;">María Coordinadora</h2>
+            <p style="color: var(--color-text-muted); font-size: 14px; margin-bottom: var(--space-md);">
+              <span class="material-symbols-rounded" style="font-size: 16px; vertical-align: text-bottom;">admin_panel_settings</span>
+              Administrador Principal
+            </p>
+          </div>
+          <button type="button" class="btn btn-outline btn-sm">
+            <span class="material-symbols-rounded" style="font-size: 18px;">photo_camera</span>
+            Cambiar foto
+          </button>
+        </section>
+
+        <!-- Tarjeta Derecha: Formulario de Datos Personales -->
+        <section class="card">
+          <h2 class="section-title">Información Personal</h2>
+          <form id="form-perfil-datos">
+            <div class="form-group">
+              <label class="form-label" for="perf-nombre">Nombre Completo</label>
+              <input type="text" id="perf-nombre" class="form-control" value="María Coordinadora">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="perf-correo">Correo Electrónico</label>
+              <input type="email" id="perf-correo" class="form-control" value="maria@brigadasalud.org">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="perf-telefono">Teléfono / Celular</label>
+              <input type="tel" id="perf-telefono" class="form-control" value="+593 99 999 9999">
+            </div>
+            <button type="submit" class="btn btn-primary btn-sm">Actualizar datos</button>
+          </form>
+        </section>
+      </div>
+
+      <!-- Sección Inferior: Seguridad y Contraseña -->
+      <section class="card section-block" style="margin-top: var(--space-lg);">
+        <h2 class="section-title">Seguridad de la Cuenta</h2>
+        <p style="font-size: 14px; color: var(--color-text-muted); margin-bottom: var(--space-md);">
+          Se recomienda cambiar tu contraseña periódicamente para mantener los registros médicos protegidos.
+        </p>
+        
+        <form id="form-perfil-password" style="max-width: 600px;">
+          <div class="grid-2" style="gap: var(--space-md); margin-bottom: var(--space-md);">
+            <div class="form-group" style="margin-bottom: 0;">
+              <label class="form-label" for="pass-actual">Contraseña Actual</label>
+              <input type="password" id="pass-actual" class="form-control" placeholder="••••••••">
+            </div>
+            <div class="form-group" style="margin-bottom: 0;">
+              <label class="form-label" for="pass-nueva">Nueva Contraseña</label>
+              <input type="password" id="pass-nueva" class="form-control" placeholder="Mínimo 8 caracteres">
+            </div>
+          </div>
+          <button type="submit" class="btn btn-secondary btn-sm">Cambiar contraseña</button>
+        </form>
+      </section>
+    </main>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script>
+    // Si tienes una función para marcar el menú activo, la usamos aquí
+    if (typeof setActiveNav === 'function') {
+      setActiveNav('perfil');
+    }
+    
+    // Alertas de prueba para verificar que los botones funcionen
+    document.getElementById('form-perfil-datos').addEventListener('submit', e => { 
+      e.preventDefault(); 
+      if (typeof showToast === 'function') showToast('Datos actualizados');
+      else alert('Datos personales actualizados correctamente');
+    });
+
+    document.getElementById('form-perfil-password').addEventListener('submit', e => { 
+      e.preventDefault(); 
+      if (typeof showToast === 'function') showToast('Contraseña modificada');
+      else alert('Contraseña cambiada con éxito');
+    });
+  </script>
+</body>
+</html>
