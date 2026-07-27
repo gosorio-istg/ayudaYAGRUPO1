@@ -3,17 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Prototipo de interfaz web BrigadaSalud — Panel del Coordinador.">
-  <title>BrigadaSalud — Guía de interfaz</title>
+  <meta name="description" content="Prototipo de interfaz web BrigadaMedica — Panel del Coordinador.">
+  <title>BrigadaMedica — Guía de interfaz</title>
   <link rel="stylesheet" href="css/styles.css">
-  <style>
-    .hub-page { max-width: 960px; margin: 0 auto; padding: var(--space-xl) var(--space-md); }
-    .hub-header { text-align: center; margin-bottom: var(--space-xl); }
-    .hub-header h1 { color: var(--color-primary); margin: var(--space-md) 0 var(--space-xs); }
-    .token-row { display: flex; flex-wrap: wrap; gap: var(--space-sm); margin: var(--space-md) 0; }
-    .token-swatch { width: 64px; height: 64px; border-radius: var(--radius-md); border: 1px solid var(--color-border); }
-    .component-demo { margin: var(--space-lg) 0; padding: var(--space-lg); background: var(--color-surface); border-radius: var(--radius-lg); border: 1px solid var(--color-border); }
-  </style>
 </head>
 <body>
 
@@ -21,13 +13,13 @@
     <header class="hub-header">
       <div class="auth-brand" style="justify-content:center">
         <span class="material-symbols-rounded">medical_services</span>
-        <span class="auth-brand-name">BrigadaSalud</span>
+        <span class="auth-brand-name">BrigadaMedica</span>
       </div>
       <h1>Prototipo de interfaz web</h1>
-      <p class="page-subtitle">Panel del Coordinador — basado en BrigadaSalud_Especificacion_UI_Web.md</p>
+      <p class="page-subtitle">Panel del Coordinador — basado en BrigadaMedica_Especificacion_UI_Web.md</p>
     </header>
 
-    <section class="component-demo">
+    <section class="section-block">
       <h2 class="section-title">Acceso</h2>
       <div class="hub-grid">
         <a href="login.html" class="hub-link"><span class="material-symbols-rounded">login</span> Login</a>
@@ -36,12 +28,13 @@
       </div>
     </section>
 
-    <section class="component-demo">
+    <section class="section-block">
       <h2 class="section-title">Módulos del sistema</h2>
       <div class="hub-grid">
         <a href="dashboard.html" class="hub-link"><span class="material-symbols-rounded">home</span> Dashboard</a>
-        <a href="brigadas.html" class="hub-link"><span class="material-symbols-rounded">groups</span> Brigadas</a>
+        <a href="brigadas.html" class="hub-link"><span class="material-symbols-rounded">groups</span> Campañas</a>
         <a href="brigada-nueva.html" class="hub-link"><span class="material-symbols-rounded">add_circle</span> Nueva campaña</a>
+        <a href="brigada-detalle.html" class="hub-link"><span class="material-symbols-rounded">event_note</span> Detalle de campaña</a>
         <a href="pacientes.html" class="hub-link"><span class="material-symbols-rounded">personal_injury</span> Pacientes</a>
         <a href="medicos.html" class="hub-link"><span class="material-symbols-rounded">stethoscope</span> Médicos</a>
         <a href="medico-form.html" class="hub-link"><span class="material-symbols-rounded">person_add</span> Formulario médico</a>
@@ -50,44 +43,57 @@
         <a href="reportes.html" class="hub-link"><span class="material-symbols-rounded">bar_chart</span> Reportes</a>
         <a href="noticias.html" class="hub-link"><span class="material-symbols-rounded">newspaper</span> Noticias</a>
         <a href="noticia-form.html" class="hub-link"><span class="material-symbols-rounded">edit_note</span> Publicar noticia</a>
+        <a href="usuarios.html" class="hub-link"><span class="material-symbols-rounded">manage_accounts</span> Usuarios</a>
         <a href="configuracion.html" class="hub-link"><span class="material-symbols-rounded">settings</span> Configuración</a>
       </div>
     </section>
 
-    <section class="component-demo">
+    <section class="section-block">
       <h2 class="section-title">Design tokens</h2>
-      <p style="font-size:var(--font-size-small);color:var(--color-text-muted);margin-bottom:var(--space-sm)">Paleta primaria y estados</p>
-      <div class="token-row">
-        <div class="token-swatch" style="background:#1565C0" title="Azul Principal"></div>
-        <div class="token-swatch" style="background:#43A047" title="Verde Salud"></div>
-        <div class="token-swatch" style="background:#42A5F5" title="Celeste"></div>
-        <div class="token-swatch" style="background:#22C55E" title="Éxito"></div>
-        <div class="token-swatch" style="background:#EF4444" title="Error"></div>
-        <div class="token-swatch" style="background:#F59E0B" title="Advertencia"></div>
+      <div class="card">
+        <p style="font-size:var(--font-size-small);color:var(--color-text-muted);margin-bottom:var(--space-sm)">Paleta primaria y estados</p>
+        <div style="display:flex;flex-wrap:wrap;gap:var(--space-sm);margin-bottom:var(--space-md)">
+          <div class="token-swatch" style="background:#1565C0" title="Azul Principal"></div>
+          <div class="token-swatch" style="background:#43A047" title="Verde Salud"></div>
+          <div class="token-swatch" style="background:#42A5F5" title="Celeste"></div>
+          <div class="token-swatch" style="background:#22C55E" title="Éxito"></div>
+          <div class="token-swatch" style="background:#EF4444" title="Error"></div>
+          <div class="token-swatch" style="background:#F59E0B" title="Advertencia"></div>
+        </div>
+        <p style="font-size:var(--font-size-small)">Tipografía: Inter · Iconografía: Material Symbols Rounded</p>
       </div>
-      <p style="font-size:var(--font-size-small);margin-top:var(--space-md)">Tipografía: Inter · Iconografía: Material Symbols Rounded</p>
     </section>
 
-    <section class="component-demo">
+    <section class="section-block">
       <h2 class="section-title">Componentes base</h2>
-      <div style="display:flex;flex-wrap:wrap;gap:var(--space-sm);margin-bottom:var(--space-md)">
-        <button class="btn btn-primary btn-sm">Primario</button>
-        <button class="btn btn-secondary btn-sm">Secundario</button>
-        <button class="btn btn-outline btn-sm">Outline</button>
-        <button class="btn btn-ghost btn-sm">Ghost</button>
-      </div>
-      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:var(--space-md)">
-        <span class="chip chip-especialidad-mg">Medicina General</span>
-        <span class="chip chip-especialidad-odo">Odontología</span>
-        <span class="chip chip-pendiente">Pendiente</span>
-        <span class="chip chip-atendido">Atendido</span>
-        <span class="chip chip-programada">Programada</span>
-      </div>
-      <div class="connection-status connection-status--online" style="display:inline-flex">
-        <span class="connection-dot"></span> Sincronizado
+      <div class="card">
+        <div style="display:flex;flex-wrap:wrap;gap:var(--space-sm);margin-bottom:var(--space-md)">
+          <button class="btn btn-primary">Primario</button>
+          <button class="btn btn-secondary">Secundario</button>
+          <button class="btn btn-outline">Outline</button>
+          <button class="btn btn-ghost">Ghost</button>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:var(--space-md)">
+          <span class="chip chip-especialidad-mg">Medicina General</span>
+          <span class="chip chip-especialidad-odo">Odontología</span>
+          <span class="chip chip-pendiente">Pendiente</span>
+          <span class="chip chip-atendido">Atendido</span>
+          <span class="chip chip-no-asistio">No asistió</span>
+          <span class="chip chip-programada">Programada</span>
+          <span class="chip chip-en-curso chip-vivo"><span class="punto-vivo"></span>En curso</span>
+        </div>
+        <div class="connection-status connection-status--online" style="display:inline-flex">
+          <span class="connection-dot"></span> Sincronizado
+        </div>
       </div>
     </section>
   </main>
 
+  <style>
+    .token-swatch { width: 64px; height: 64px; border-radius: var(--radius-md); border: 1px solid var(--color-border); }
+    .hub-page { max-width: 960px; margin: 0 auto; padding: var(--space-xl) var(--space-md); }
+    .hub-header { text-align: center; margin-bottom: var(--space-xl); }
+    .hub-header h1 { color: var(--color-primary); margin: var(--space-md) 0 var(--space-xs); }
+  </style>
 </body>
 </html>

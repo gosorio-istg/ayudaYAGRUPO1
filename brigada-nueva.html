@@ -3,23 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BrigadaSalud — Nueva campaña</title>
+  <title>BrigadaMedica — Nueva campaña</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body class="app-layout">
 
   <aside class="sidebar" id="sidebar">
-    <div class="sidebar-brand"><span class="material-symbols-rounded">medical_services</span> BrigadaSalud</div>
-    <nav class="sidebar-nav">
+    <div class="sidebar-brand"><span class="material-symbols-rounded">medical_services</span> BrigadaMedica</div>
+    <nav class="sidebar-nav" aria-label="Navegación principal">
       <a href="dashboard.html" class="sidebar-link" data-page="dashboard"><span class="material-symbols-rounded">home</span> Dashboard</a>
-      <a href="brigadas.html" class="sidebar-link is-active" data-page="brigadas"><span class="material-symbols-rounded">groups</span> Brigadas</a>
-      <a href="pacientes.html" class="sidebar-link" data-page="pacientes"><span class="material-symbols-rounded">personal_injury</span> Pacientes</a>
-      <a href="medicos.html" class="sidebar-link" data-page="medicos"><span class="material-symbols-rounded">stethoscope</span> Médicos</a>
-      <a href="brigadistas.html" class="sidebar-link" data-page="brigadistas"><span class="material-symbols-rounded">volunteer_activism</span> Brigadistas</a>
-      <a href="comunidades.html" class="sidebar-link" data-page="comunidades"><span class="material-symbols-rounded">location_city</span> Comunidades</a>
-      <a href="reportes.html" class="sidebar-link" data-page="reportes"><span class="material-symbols-rounded">bar_chart</span> Reportes</a>
-      <a href="noticias.html" class="sidebar-link" data-page="noticias"><span class="material-symbols-rounded">newspaper</span> Noticias</a>
-      <a href="configuracion.html" class="sidebar-link" data-page="configuracion"><span class="material-symbols-rounded">settings</span> Configuración</a>
+
+      <div class="sidebar-section">
+        <div class="sidebar-section-label">Operación</div>
+        <a href="brigadas.html" class="sidebar-link is-active" data-page="brigadas"><span class="material-symbols-rounded">groups</span> Campañas</a>
+        <a href="pacientes.html" class="sidebar-link" data-page="pacientes"><span class="material-symbols-rounded">personal_injury</span> Pacientes</a>
+        <a href="medicos.html" class="sidebar-link" data-page="medicos"><span class="material-symbols-rounded">stethoscope</span> Médicos</a>
+        <a href="brigadistas.html" class="sidebar-link" data-page="brigadistas"><span class="material-symbols-rounded">volunteer_activism</span> Brigadistas</a>
+        <a href="comunidades.html" class="sidebar-link" data-page="comunidades"><span class="material-symbols-rounded">location_city</span> Comunidades</a>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-section-label">Análisis</div>
+        <a href="reportes.html" class="sidebar-link" data-page="reportes"><span class="material-symbols-rounded">bar_chart</span> Reportes</a>
+        <a href="noticias.html" class="sidebar-link" data-page="noticias"><span class="material-symbols-rounded">newspaper</span> Noticias</a>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-section-label">Administración</div>
+        <a href="usuarios.html" class="sidebar-link" data-page="usuarios"><span class="material-symbols-rounded">manage_accounts</span> Usuarios</a>
+        <a href="configuracion.html" class="sidebar-link" data-page="configuracion"><span class="material-symbols-rounded">settings</span> Configuración</a>
+      </div>
     </nav>
     <div class="sidebar-footer">
       <a href="login.html" class="sidebar-link sidebar-link--logout"><span class="material-symbols-rounded">logout</span> Cerrar sesión</a>
@@ -29,12 +42,44 @@
 
   <div class="app-main">
     <header class="topbar">
-      <button class="topbar-toggle icon-btn" id="sidebar-toggle" aria-label="Abrir menú"><span class="material-symbols-rounded">menu</span></button>
-      <div class="topbar-search"><span class="material-symbols-rounded">search</span><input type="search" placeholder="Buscar..." aria-label="Buscar"></div>
+      <div class="topbar-search" id="global-search">
+        <span class="material-symbols-rounded">search</span>
+        <input type="search" id="global-search-input" placeholder="Buscar pacientes, campañas, médicos..." aria-label="Buscar" autocomplete="off">
+        <div class="global-search-results" id="global-search-results"></div>
+      </div>
       <div class="topbar-actions">
-        <div class="connection-status connection-status--online"><span class="connection-dot"></span> Sincronizado</div>
-        <button class="icon-btn" aria-label="Notificaciones"><span class="material-symbols-rounded">notifications</span></button>
-        <div class="avatar avatar-sm">MC</div>
+        <div class="connection-status connection-status--online" id="connection-badge" aria-live="polite">
+          <span class="connection-dot"></span> <span id="connection-text">Sincronizado</span>
+        </div>
+        <button class="icon-btn" aria-label="Notificaciones (3 pendientes)">
+          <span class="material-symbols-rounded">notifications</span>
+          <span class="badge-count">3</span>
+        </button>
+
+        <div class="user-menu" id="user-menu">
+          <button class="user-menu-trigger" id="user-menu-trigger" aria-haspopup="true" aria-expanded="false" aria-label="Abrir menú de usuario">
+            <div class="avatar avatar-sm">MC</div>
+            <span class="material-symbols-rounded user-menu-caret">expand_more</span>
+          </button>
+          <div class="user-menu-dropdown">
+            <div class="user-menu-header">
+              <div class="avatar avatar-md">MC</div>
+              <div class="user-menu-identity">
+                <strong>María Coordinadora</strong>
+                <span>coordinadora@brigadamedica.test</span>
+                <div class="user-menu-roles"><span class="chip chip-confirmado">Coordinador</span></div>
+              </div>
+            </div>
+            <div class="user-menu-divider"></div>
+            <a href="configuracion.html" class="user-menu-item">
+              <span class="material-symbols-rounded">person</span> Ver mi perfil
+            </a>
+            <div class="user-menu-divider"></div>
+            <a href="login.html" class="user-menu-item user-menu-item--danger">
+              <span class="material-symbols-rounded">logout</span> Cerrar sesión
+            </a>
+          </div>
+        </div>
       </div>
     </header>
 
@@ -44,14 +89,18 @@
           <span class="material-symbols-rounded">arrow_back</span> Volver
         </a>
         <h1>Nueva campaña</h1>
-        <p class="page-subtitle">Programa una nueva brigada médica comunitaria</p>
+        <p class="page-subtitle">Programa una nueva campaña médica comunitaria</p>
       </header>
 
       <div class="card" style="max-width:640px">
-        <form id="form-brigada">
+        <form id="form-brigada" novalidate>
           <div class="form-group">
             <label class="form-label" for="nombre">Nombre de la campaña</label>
-            <input type="text" id="nombre" class="form-control" placeholder="Ej. Jornada de salud Bastión Popular" required>
+            <input type="text" id="nombre" class="form-control" placeholder="Ej. Jornada de salud Bastión Popular" minlength="5" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="descripcion">Descripción (opcional)</label>
+            <textarea id="descripcion" class="form-control" placeholder="Detalle breve de la jornada..."></textarea>
           </div>
           <div class="form-group">
             <label class="form-label" for="fecha">Fecha</label>
@@ -59,21 +108,19 @@
           </div>
           <div class="form-group">
             <label class="form-label" for="ubicacion">Ubicación</label>
-            <input type="text" id="ubicacion" class="form-control" placeholder="Sector, referencia o dirección" required>
+            <input type="text" id="ubicacion" class="form-control" placeholder="Sector, referencia o dirección" minlength="5" required>
           </div>
           <div class="form-group">
-            <label class="form-label">Especialidades ofrecidas</label>
-            <div style="display:flex;flex-wrap:wrap;gap:8px">
-              <span class="chip chip-especialidad-mg chip-selectable">Medicina General</span>
-              <span class="chip chip-especialidad-odo chip-selectable">Odontología</span>
-              <span class="chip chip-especialidad-ped chip-selectable">Pediatría</span>
-              <span class="chip chip-especialidad-gin chip-selectable">Ginecología</span>
-              <span class="chip chip-especialidad-nut chip-selectable">Nutrición</span>
+            <label class="form-label">Especialidades ofrecidas y cupos</label>
+            <div style="display:flex;flex-wrap:wrap;gap:8px" id="especialidades-chips">
+              <span class="chip chip-especialidad-mg chip-selectable" data-especialidad="Medicina General">Medicina General</span>
+              <span class="chip chip-especialidad-odo chip-selectable" data-especialidad="Odontología">Odontología</span>
+              <span class="chip chip-especialidad-ped chip-selectable" data-especialidad="Pediatría">Pediatría</span>
+              <span class="chip chip-especialidad-gin chip-selectable" data-especialidad="Ginecología">Ginecología</span>
+              <span class="chip chip-especialidad-nut chip-selectable" data-especialidad="Nutrición">Nutrición</span>
             </div>
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="cupos">Cupos por especialidad</label>
-            <input type="number" id="cupos" class="form-control" placeholder="Ej. 30" min="1" required>
+            <div id="especialidades-cupos" style="margin-top:var(--space-sm);display:flex;flex-direction:column;gap:8px"></div>
+            <span class="form-error-msg" id="error-especialidades" hidden>Selecciona al menos una especialidad y define sus cupos.</span>
           </div>
           <div style="display:flex;gap:var(--space-sm);margin-top:var(--space-lg)">
             <a href="brigadas.html" class="btn btn-outline">Cancelar</a>
@@ -84,12 +131,90 @@
     </main>
   </div>
 
+  <nav class="bottom-nav" aria-label="Navegación inferior">
+    <a href="dashboard.html" class="bottom-nav-item" aria-label="Inicio">
+      <span class="material-symbols-rounded">home</span>
+      Inicio
+    </a>
+    <a href="brigadas.html" class="bottom-nav-item is-active" aria-label="Campañas">
+      <span class="material-symbols-rounded">groups</span>
+      Campañas
+    </a>
+    <div class="bottom-nav-spacer" aria-hidden="true"></div>
+    <a href="pacientes.html" class="bottom-nav-item" aria-label="Pacientes">
+      <span class="material-symbols-rounded">personal_injury</span>
+      Pacientes
+    </a>
+    <a href="noticias.html" class="bottom-nav-item" aria-label="Notificaciones">
+      <span class="material-symbols-rounded">notifications</span>
+      Alertas
+    </a>
+
+    <button class="bottom-nav-menu-btn" id="sidebar-toggle" aria-label="Abrir menú completo">
+      <span class="material-symbols-rounded">menu</span>
+    </button>
+  </nav>
+
   <script src="js/app.js"></script>
   <script>
+    setActiveNav('brigadas');
+
+    // No se puede programar una campaña en el pasado ni demasiado lejos en el futuro.
+    document.getElementById('fecha').min = new Date().toISOString().slice(0, 10);
+    const fechaMaxima = new Date();
+    fechaMaxima.setFullYear(fechaMaxima.getFullYear() + 2);
+    document.getElementById('fecha').max = fechaMaxima.toISOString().slice(0, 10);
+
+    ['nombre', 'ubicacion'].forEach(id => {
+      document.getElementById(id).addEventListener('input', function () {
+        this.value = this.value.replace(/[^\p{L}\d\s.,#-]/gu, '');
+      });
+    });
+
+    const seleccionadas = new Map(); // nombre especialidad -> cupos
+
+    function pintarCupos() {
+      const contenedor = document.getElementById('especialidades-cupos');
+      if (!seleccionadas.size) {
+        contenedor.innerHTML = '';
+        return;
+      }
+      contenedor.innerHTML = Array.from(seleccionadas.keys()).map(nombre => `
+        <div style="display:flex;align-items:center;gap:8px">
+          <span style="flex:1;font-size:var(--font-size-small)">${nombre}</span>
+          <input type="number" min="1" class="form-control" style="max-width:110px" placeholder="Cupos"
+                 data-cupos-para="${nombre}" value="${seleccionadas.get(nombre)}">
+        </div>`).join('');
+
+      contenedor.querySelectorAll('[data-cupos-para]').forEach(input => {
+        input.addEventListener('input', () => {
+          seleccionadas.set(input.dataset.cuposPara, parseInt(input.value, 10) || 1);
+        });
+      });
+    }
+
+    document.querySelectorAll('#especialidades-chips .chip-selectable').forEach(chip => {
+      chip.addEventListener('click', () => {
+        chip.classList.toggle('is-selected');
+        const nombre = chip.dataset.especialidad;
+        if (chip.classList.contains('is-selected')) {
+          seleccionadas.set(nombre, 10);
+        } else {
+          seleccionadas.delete(nombre);
+        }
+        pintarCupos();
+      });
+    });
+
     document.getElementById('form-brigada').addEventListener('submit', function(e) {
       e.preventDefault();
-      showToast('Campaña creada correctamente');
-      setTimeout(() => window.location.href = 'brigadas.html', 1000);
+      document.getElementById('error-especialidades').hidden = true;
+      if (!seleccionadas.size) {
+        document.getElementById('error-especialidades').hidden = false;
+        return;
+      }
+      showToast('Campaña creada correctamente.');
+      setTimeout(() => window.location.href = 'brigadas.html', 800);
     });
   </script>
 </body>

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BrigadaMedica — Detalle de campaña</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="app-layout">
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand"><span class="material-symbols-rounded">medical_services</span> BrigadaMedica</div>
+    <nav class="sidebar-nav" aria-label="Navegación principal">
+      <a href="dashboard.html" class="sidebar-link" data-page="dashboard"><span class="material-symbols-rounded">home</span> Dashboard</a>
+
+      <div class="sidebar-section">
+        <div class="sidebar-section-label">Operación</div>
+        <a href="brigadas.html" class="sidebar-link is-active" data-page="brigadas"><span class="material-symbols-rounded">groups</span> Campañas</a>
+        <a href="pacientes.html" class="sidebar-link" data-page="pacientes"><span class="material-symbols-rounded">personal_injury</span> Pacientes</a>
+        <a href="medicos.html" class="sidebar-link" data-page="medicos"><span class="material-symbols-rounded">stethoscope</span> Médicos</a>
+        <a href="brigadistas.html" class="sidebar-link" data-page="brigadistas"><span class="material-symbols-rounded">volunteer_activism</span> Brigadistas</a>
+        <a href="comunidades.html" class="sidebar-link" data-page="comunidades"><span class="material-symbols-rounded">location_city</span> Comunidades</a>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-section-label">Análisis</div>
+        <a href="reportes.html" class="sidebar-link" data-page="reportes"><span class="material-symbols-rounded">bar_chart</span> Reportes</a>
+        <a href="noticias.html" class="sidebar-link" data-page="noticias"><span class="material-symbols-rounded">newspaper</span> Noticias</a>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-section-label">Administración</div>
+        <a href="usuarios.html" class="sidebar-link" data-page="usuarios"><span class="material-symbols-rounded">manage_accounts</span> Usuarios</a>
+        <a href="configuracion.html" class="sidebar-link" data-page="configuracion"><span class="material-symbols-rounded">settings</span> Configuración</a>
+      </div>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="login.html" class="sidebar-link sidebar-link--logout"><span class="material-symbols-rounded">logout</span> Cerrar sesión</a>
+    </div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+  <div class="app-main">
+    <header class="topbar">
+      <div class="topbar-search" id="global-search">
+        <span class="material-symbols-rounded">search</span>
+        <input type="search" id="global-search-input" placeholder="Buscar pacientes, campañas, médicos..." aria-label="Buscar" autocomplete="off">
+        <div class="global-search-results" id="global-search-results"></div>
+      </div>
+      <div class="topbar-actions">
+        <div class="connection-status connection-status--online" id="connection-badge" aria-live="polite">
+          <span class="connection-dot"></span> <span id="connection-text">Sincronizado</span>
+        </div>
+        <button class="icon-btn" aria-label="Notificaciones (3 pendientes)">
+          <span class="material-symbols-rounded">notifications</span>
+          <span class="badge-count">3</span>
+        </button>
+
+        <div class="user-menu" id="user-menu">
+          <button class="user-menu-trigger" id="user-menu-trigger" aria-haspopup="true" aria-expanded="false" aria-label="Abrir menú de usuario">
+            <div class="avatar avatar-sm">MC</div>
+            <span class="material-symbols-rounded user-menu-caret">expand_more</span>
+          </button>
+          <div class="user-menu-dropdown">
+            <div class="user-menu-header">
+              <div class="avatar avatar-md">MC</div>
+              <div class="user-menu-identity">
+                <strong>María Coordinadora</strong>
+                <span>coordinadora@brigadamedica.test</span>
+                <div class="user-menu-roles"><span class="chip chip-confirmado">Coordinador</span></div>
+              </div>
+            </div>
+            <div class="user-menu-divider"></div>
+            <a href="configuracion.html" class="user-menu-item">
+              <span class="material-symbols-rounded">person</span> Ver mi perfil
+            </a>
+            <div class="user-menu-divider"></div>
+            <a href="login.html" class="user-menu-item user-menu-item--danger">
+              <span class="material-symbols-rounded">logout</span> Cerrar sesión
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="page-content">
+      <header class="page-header">
+        <a href="brigadas.html" class="btn btn-ghost btn-sm" style="margin-bottom:var(--space-sm)">
+          <span class="material-symbols-rounded">arrow_back</span> Volver a Campañas
+        </a>
+        <div class="flex-between">
+          <h1 id="campana-nombre">Campaña Bastión Popular</h1>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <button type="button" class="btn btn-outline" id="btn-iniciar-campana">
+              <span class="material-symbols-rounded">play_arrow</span> Iniciar campaña
+            </button>
+            <button type="button" class="btn btn-outline" id="btn-finalizar-campana" style="display:none">
+              <span class="material-symbols-rounded">task_alt</span> Finalizar
+            </button>
+            <a href="pacientes.html" class="btn btn-primary" id="btn-registrar-turno">
+              <span class="material-symbols-rounded">add</span> Registrar turno
+            </a>
+          </div>
+        </div>
+      </header>
+
+      <div class="card" style="margin-bottom:var(--space-lg)">
+        <div id="campana-info">
+          <div class="detail-row"><span class="detail-label">Estado</span><span class="chip chip-programada" id="campana-estado-chip">Programada</span></div>
+          <div class="detail-row"><span class="detail-label">Fecha</span><span>25 Jul 2026</span></div>
+          <div class="detail-row"><span class="detail-label">Ubicación</span><span>Cooperativa Balerio Estacio</span></div>
+          <div class="detail-row"><span class="detail-label">Coordinador</span><span>María Coordinadora</span></div>
+          <h3 style="font-size:var(--font-size-small);margin:var(--space-md) 0 var(--space-sm)">Especialidades</h3>
+          <p style="font-size:var(--font-size-small);color:var(--color-text-muted)">Medicina General (12/40 cupos), Odontología (8/20 cupos), Pediatría (5/25 cupos)</p>
+        </div>
+      </div>
+
+      <section class="section-block">
+        <h2 class="section-title">Pacientes asignados</h2>
+        <div class="table-responsive">
+          <table class="data-table" id="tabla-pacientes-campana">
+            <thead>
+              <tr>
+                <th>Paciente</th>
+                <th>Turno</th>
+                <th>Especialidad</th>
+                <th>Estado</th>
+                <th>Hora</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="tabla-pacientes-campana-body">
+              <tr data-estado="atendido">
+                <td data-label="Paciente"><a href="pacientes.html" style="color:var(--color-text-main);font-weight:600;text-decoration:none">María González</a><br><small style="color:var(--color-text-muted)">0923456789</small></td>
+                <td data-label="Turno">MG-024</td>
+                <td data-label="Especialidad"><span class="chip chip-especialidad-mg">Medicina General</span></td>
+                <td data-label="Estado"><span class="chip chip-atendido">Atendido</span></td>
+                <td data-label="Hora">09:15</td>
+                <td data-label="Acciones">—</td>
+              </tr>
+              <tr data-estado="pendiente">
+                <td data-label="Paciente"><a href="pacientes.html" style="color:var(--color-text-main);font-weight:600;text-decoration:none">Carlos Mendoza</a><br><small style="color:var(--color-text-muted)">0912345678</small></td>
+                <td data-label="Turno">ODO-012</td>
+                <td data-label="Especialidad"><span class="chip chip-especialidad-odo">Odontología</span></td>
+                <td data-label="Estado"><span class="chip chip-pendiente">Pendiente</span></td>
+                <td data-label="Hora">10:30</td>
+                <td data-label="Acciones">
+                  <div style="display:flex;gap:6px;flex-wrap:wrap">
+                    <button type="button" class="btn btn-outline btn-sm" data-marcar-turno="atendido">Atendido</button>
+                    <button type="button" class="btn btn-outline btn-sm" data-marcar-turno="no_asistio">No asistió</button>
+                    <button type="button" class="btn btn-outline btn-sm" data-marcar-turno="cancelado">Cancelar</button>
+                  </div>
+                </td>
+              </tr>
+              <tr data-estado="en_espera">
+                <td data-label="Paciente"><a href="pacientes.html" style="color:var(--color-text-main);font-weight:600;text-decoration:none">Ana Torres</a><br><small style="color:var(--color-text-muted)">0956789012</small></td>
+                <td data-label="Turno">PED-008</td>
+                <td data-label="Especialidad"><span class="chip chip-especialidad-ped">Pediatría</span></td>
+                <td data-label="Estado"><span class="chip chip-espera">En espera</span></td>
+                <td data-label="Hora">11:00</td>
+                <td data-label="Acciones">
+                  <div style="display:flex;gap:6px;flex-wrap:wrap">
+                    <button type="button" class="btn btn-outline btn-sm" data-marcar-turno="atendido">Atendido</button>
+                    <button type="button" class="btn btn-outline btn-sm" data-marcar-turno="no_asistio">No asistió</button>
+                    <button type="button" class="btn btn-outline btn-sm" data-marcar-turno="cancelado">Cancelar</button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <nav class="bottom-nav" aria-label="Navegación inferior">
+    <a href="dashboard.html" class="bottom-nav-item" aria-label="Inicio">
+      <span class="material-symbols-rounded">home</span>
+      Inicio
+    </a>
+    <a href="brigadas.html" class="bottom-nav-item is-active" aria-label="Campañas">
+      <span class="material-symbols-rounded">groups</span>
+      Campañas
+    </a>
+    <div class="bottom-nav-spacer" aria-hidden="true"></div>
+    <a href="pacientes.html" class="bottom-nav-item" aria-label="Pacientes">
+      <span class="material-symbols-rounded">personal_injury</span>
+      Pacientes
+    </a>
+    <a href="noticias.html" class="bottom-nav-item" aria-label="Notificaciones">
+      <span class="material-symbols-rounded">notifications</span>
+      Alertas
+    </a>
+
+    <button class="bottom-nav-menu-btn" id="sidebar-toggle" aria-label="Abrir menú completo">
+      <span class="material-symbols-rounded">menu</span>
+    </button>
+  </nav>
+
+  <script src="js/app.js"></script>
+  <script>
+    setActiveNav('brigadas');
+
+    const ETIQUETAS_ESTADO = { atendido: 'Atendido', no_asistio: 'No asistió', cancelado: 'Cancelado' };
+    const CHIP_ESTADO = { atendido: 'chip-atendido', no_asistio: 'chip-no-asistio', cancelado: 'chip-cancelado' };
+
+    document.querySelectorAll('[data-marcar-turno]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const nuevoEstado = btn.dataset.marcarTurno;
+        const fila = btn.closest('tr');
+        fila.dataset.estado = nuevoEstado;
+        fila.querySelector('td[data-label="Estado"]').innerHTML =
+          `<span class="chip ${CHIP_ESTADO[nuevoEstado]}">${ETIQUETAS_ESTADO[nuevoEstado]}</span>`;
+        fila.querySelector('td[data-label="Acciones"]').innerHTML = '—';
+        showToast(`Turno marcado como "${ETIQUETAS_ESTADO[nuevoEstado]}".`);
+      });
+    });
+
+    // Cambiar de estado de la campaña: solo diseño, alterna entre Programada -> En curso -> Finalizada.
+    document.getElementById('btn-iniciar-campana').addEventListener('click', function () {
+      const pendientes = document.querySelectorAll('#tabla-pacientes-campana-body tr[data-estado="pendiente"], #tabla-pacientes-campana-body tr[data-estado="en_espera"]');
+      document.getElementById('campana-estado-chip').className = 'chip chip-en-curso chip-vivo';
+      document.getElementById('campana-estado-chip').innerHTML = '<span class="punto-vivo"></span>En curso';
+      this.style.display = 'none';
+      document.getElementById('btn-finalizar-campana').style.display = 'inline-flex';
+      showToast('Campaña iniciada.');
+    });
+
+    document.getElementById('btn-finalizar-campana').addEventListener('click', function () {
+      const pendientes = document.querySelectorAll('#tabla-pacientes-campana-body tr[data-estado="pendiente"], #tabla-pacientes-campana-body tr[data-estado="en_espera"]');
+      if (pendientes.length) {
+        showToast('No puedes finalizar: todavía hay turnos pendientes o en espera.', 'error');
+        return;
+      }
+      document.getElementById('campana-estado-chip').className = 'chip chip-finalizada';
+      document.getElementById('campana-estado-chip').textContent = 'Finalizada';
+      this.style.display = 'none';
+      document.getElementById('btn-registrar-turno').style.display = 'none';
+      showToast('Campaña finalizada.');
+    });
+  </script>
+</body>
+</html>

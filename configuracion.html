@@ -3,23 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BrigadaSalud — Configuración</title>
+  <title>BrigadaMedica — Configuración</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body class="app-layout">
 
   <aside class="sidebar" id="sidebar">
-    <div class="sidebar-brand"><span class="material-symbols-rounded">medical_services</span> BrigadaSalud</div>
-    <nav class="sidebar-nav">
+    <div class="sidebar-brand"><span class="material-symbols-rounded">medical_services</span> BrigadaMedica</div>
+    <nav class="sidebar-nav" aria-label="Navegación principal">
       <a href="dashboard.html" class="sidebar-link" data-page="dashboard"><span class="material-symbols-rounded">home</span> Dashboard</a>
-      <a href="brigadas.html" class="sidebar-link" data-page="brigadas"><span class="material-symbols-rounded">groups</span> Brigadas</a>
-      <a href="pacientes.html" class="sidebar-link" data-page="pacientes"><span class="material-symbols-rounded">personal_injury</span> Pacientes</a>
-      <a href="medicos.html" class="sidebar-link" data-page="medicos"><span class="material-symbols-rounded">stethoscope</span> Médicos</a>
-      <a href="brigadistas.html" class="sidebar-link" data-page="brigadistas"><span class="material-symbols-rounded">volunteer_activism</span> Brigadistas</a>
-      <a href="comunidades.html" class="sidebar-link" data-page="comunidades"><span class="material-symbols-rounded">location_city</span> Comunidades</a>
-      <a href="reportes.html" class="sidebar-link" data-page="reportes"><span class="material-symbols-rounded">bar_chart</span> Reportes</a>
-      <a href="noticias.html" class="sidebar-link" data-page="noticias"><span class="material-symbols-rounded">newspaper</span> Noticias</a>
-      <a href="configuracion.html" class="sidebar-link is-active" data-page="configuracion"><span class="material-symbols-rounded">settings</span> Configuración</a>
+
+      <div class="sidebar-section">
+        <div class="sidebar-section-label">Operación</div>
+        <a href="brigadas.html" class="sidebar-link" data-page="brigadas"><span class="material-symbols-rounded">groups</span> Campañas</a>
+        <a href="pacientes.html" class="sidebar-link" data-page="pacientes"><span class="material-symbols-rounded">personal_injury</span> Pacientes</a>
+        <a href="medicos.html" class="sidebar-link" data-page="medicos"><span class="material-symbols-rounded">stethoscope</span> Médicos</a>
+        <a href="brigadistas.html" class="sidebar-link" data-page="brigadistas"><span class="material-symbols-rounded">volunteer_activism</span> Brigadistas</a>
+        <a href="comunidades.html" class="sidebar-link" data-page="comunidades"><span class="material-symbols-rounded">location_city</span> Comunidades</a>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-section-label">Análisis</div>
+        <a href="reportes.html" class="sidebar-link" data-page="reportes"><span class="material-symbols-rounded">bar_chart</span> Reportes</a>
+        <a href="noticias.html" class="sidebar-link" data-page="noticias"><span class="material-symbols-rounded">newspaper</span> Noticias</a>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-section-label">Administración</div>
+        <a href="usuarios.html" class="sidebar-link" data-page="usuarios"><span class="material-symbols-rounded">manage_accounts</span> Usuarios</a>
+        <a href="configuracion.html" class="sidebar-link is-active" data-page="configuracion"><span class="material-symbols-rounded">settings</span> Configuración</a>
+      </div>
     </nav>
     <div class="sidebar-footer">
       <a href="login.html" class="sidebar-link sidebar-link--logout"><span class="material-symbols-rounded">logout</span> Cerrar sesión</a>
@@ -29,15 +42,44 @@
 
   <div class="app-main">
     <header class="topbar">
-      <button class="topbar-toggle icon-btn" id="sidebar-toggle" aria-label="Abrir menú"><span class="material-symbols-rounded">menu</span></button>
-      <div class="topbar-search"><span class="material-symbols-rounded">search</span><input type="search" placeholder="Buscar..." aria-label="Buscar"></div>
+      <div class="topbar-search" id="global-search">
+        <span class="material-symbols-rounded">search</span>
+        <input type="search" id="global-search-input" placeholder="Buscar pacientes, campañas, médicos..." aria-label="Buscar" autocomplete="off">
+        <div class="global-search-results" id="global-search-results"></div>
+      </div>
       <div class="topbar-actions">
-        <div class="connection-status connection-status--offline" id="connection-badge">
-          <span class="connection-dot"></span>
-          <span id="connection-text">2 pendientes</span>
+        <div class="connection-status connection-status--online" id="connection-badge" aria-live="polite">
+          <span class="connection-dot"></span> <span id="connection-text">Sincronizado</span>
         </div>
-        <button class="icon-btn" aria-label="Notificaciones"><span class="material-symbols-rounded">notifications</span></button>
-        <div class="avatar avatar-sm">MC</div>
+        <button class="icon-btn" aria-label="Notificaciones (3 pendientes)">
+          <span class="material-symbols-rounded">notifications</span>
+          <span class="badge-count">3</span>
+        </button>
+
+        <div class="user-menu" id="user-menu">
+          <button class="user-menu-trigger" id="user-menu-trigger" aria-haspopup="true" aria-expanded="false" aria-label="Abrir menú de usuario">
+            <div class="avatar avatar-sm">MC</div>
+            <span class="material-symbols-rounded user-menu-caret">expand_more</span>
+          </button>
+          <div class="user-menu-dropdown">
+            <div class="user-menu-header">
+              <div class="avatar avatar-md">MC</div>
+              <div class="user-menu-identity">
+                <strong>María Coordinadora</strong>
+                <span>coordinadora@brigadamedica.test</span>
+                <div class="user-menu-roles"><span class="chip chip-confirmado">Coordinador</span></div>
+              </div>
+            </div>
+            <div class="user-menu-divider"></div>
+            <a href="configuracion.html" class="user-menu-item">
+              <span class="material-symbols-rounded">person</span> Ver mi perfil
+            </a>
+            <div class="user-menu-divider"></div>
+            <a href="login.html" class="user-menu-item user-menu-item--danger">
+              <span class="material-symbols-rounded">logout</span> Cerrar sesión
+            </a>
+          </div>
+        </div>
       </div>
     </header>
 
@@ -48,22 +90,22 @@
       </header>
 
       <div class="grid-2">
-        <section class="card">
+        <section class="card section-block">
           <h2 class="section-title">Datos de la cuenta</h2>
-          <form id="form-cuenta">
+          <form id="form-cuenta" novalidate>
             <div class="form-group">
               <label class="form-label" for="nombre">Nombre</label>
               <input type="text" id="nombre" class="form-control" value="María Coordinadora">
             </div>
             <div class="form-group">
               <label class="form-label" for="correo">Correo</label>
-              <input type="email" id="correo" class="form-control" value="maria@brigadasalud.org">
+              <input type="email" id="correo" class="form-control" value="coordinadora@brigadamedica.test">
             </div>
             <button type="submit" class="btn btn-primary btn-sm">Guardar cambios</button>
           </form>
         </section>
 
-        <section class="card">
+        <section class="card section-block">
           <h2 class="section-title">Estado de sincronización</h2>
           <p style="font-size:var(--font-size-small);color:var(--color-text-muted);margin-bottom:var(--space-md)">
             Modo offline detectado. Hay registros pendientes de envío al servidor.
@@ -79,7 +121,7 @@
         </section>
       </div>
 
-      <section class="card section-block" style="margin-top:var(--space-lg)">
+      <section class="card section-block">
         <h2 class="section-title">Especialidades disponibles</h2>
         <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:var(--space-md)">
           <span class="chip chip-especialidad-mg">Medicina General</span>
@@ -97,7 +139,7 @@
         </div>
       </section>
 
-      <section class="card">
+      <section class="card section-block">
         <h2 class="section-title">Preferencias de notificación</h2>
         <div class="setting-row">
           <div>
@@ -132,6 +174,30 @@
       </section>
     </main>
   </div>
+
+  <nav class="bottom-nav" aria-label="Navegación inferior">
+    <a href="dashboard.html" class="bottom-nav-item" aria-label="Inicio">
+      <span class="material-symbols-rounded">home</span>
+      Inicio
+    </a>
+    <a href="brigadas.html" class="bottom-nav-item" aria-label="Campañas">
+      <span class="material-symbols-rounded">groups</span>
+      Campañas
+    </a>
+    <div class="bottom-nav-spacer" aria-hidden="true"></div>
+    <a href="pacientes.html" class="bottom-nav-item" aria-label="Pacientes">
+      <span class="material-symbols-rounded">personal_injury</span>
+      Pacientes
+    </a>
+    <a href="noticias.html" class="bottom-nav-item" aria-label="Notificaciones">
+      <span class="material-symbols-rounded">notifications</span>
+      Alertas
+    </a>
+
+    <button class="bottom-nav-menu-btn" id="sidebar-toggle" aria-label="Abrir menú completo">
+      <span class="material-symbols-rounded">menu</span>
+    </button>
+  </nav>
 
   <div class="modal-overlay" id="modal-sync">
     <div class="modal" role="dialog">

@@ -3,23 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BrigadaSalud — Publicar noticia</title>
+  <title>BrigadaMedica — Publicar noticia</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body class="app-layout">
 
   <aside class="sidebar" id="sidebar">
-    <div class="sidebar-brand"><span class="material-symbols-rounded">medical_services</span> BrigadaSalud</div>
-    <nav class="sidebar-nav">
+    <div class="sidebar-brand"><span class="material-symbols-rounded">medical_services</span> BrigadaMedica</div>
+    <nav class="sidebar-nav" aria-label="Navegación principal">
       <a href="dashboard.html" class="sidebar-link" data-page="dashboard"><span class="material-symbols-rounded">home</span> Dashboard</a>
-      <a href="brigadas.html" class="sidebar-link" data-page="brigadas"><span class="material-symbols-rounded">groups</span> Brigadas</a>
-      <a href="pacientes.html" class="sidebar-link" data-page="pacientes"><span class="material-symbols-rounded">personal_injury</span> Pacientes</a>
-      <a href="medicos.html" class="sidebar-link" data-page="medicos"><span class="material-symbols-rounded">stethoscope</span> Médicos</a>
-      <a href="brigadistas.html" class="sidebar-link" data-page="brigadistas"><span class="material-symbols-rounded">volunteer_activism</span> Brigadistas</a>
-      <a href="comunidades.html" class="sidebar-link" data-page="comunidades"><span class="material-symbols-rounded">location_city</span> Comunidades</a>
-      <a href="reportes.html" class="sidebar-link" data-page="reportes"><span class="material-symbols-rounded">bar_chart</span> Reportes</a>
-      <a href="noticias.html" class="sidebar-link is-active" data-page="noticias"><span class="material-symbols-rounded">newspaper</span> Noticias</a>
-      <a href="configuracion.html" class="sidebar-link" data-page="configuracion"><span class="material-symbols-rounded">settings</span> Configuración</a>
+
+      <div class="sidebar-section">
+        <div class="sidebar-section-label">Operación</div>
+        <a href="brigadas.html" class="sidebar-link" data-page="brigadas"><span class="material-symbols-rounded">groups</span> Campañas</a>
+        <a href="pacientes.html" class="sidebar-link" data-page="pacientes"><span class="material-symbols-rounded">personal_injury</span> Pacientes</a>
+        <a href="medicos.html" class="sidebar-link" data-page="medicos"><span class="material-symbols-rounded">stethoscope</span> Médicos</a>
+        <a href="brigadistas.html" class="sidebar-link" data-page="brigadistas"><span class="material-symbols-rounded">volunteer_activism</span> Brigadistas</a>
+        <a href="comunidades.html" class="sidebar-link" data-page="comunidades"><span class="material-symbols-rounded">location_city</span> Comunidades</a>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-section-label">Análisis</div>
+        <a href="reportes.html" class="sidebar-link" data-page="reportes"><span class="material-symbols-rounded">bar_chart</span> Reportes</a>
+        <a href="noticias.html" class="sidebar-link is-active" data-page="noticias"><span class="material-symbols-rounded">newspaper</span> Noticias</a>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-section-label">Administración</div>
+        <a href="usuarios.html" class="sidebar-link" data-page="usuarios"><span class="material-symbols-rounded">manage_accounts</span> Usuarios</a>
+        <a href="configuracion.html" class="sidebar-link" data-page="configuracion"><span class="material-symbols-rounded">settings</span> Configuración</a>
+      </div>
     </nav>
     <div class="sidebar-footer">
       <a href="login.html" class="sidebar-link sidebar-link--logout"><span class="material-symbols-rounded">logout</span> Cerrar sesión</a>
@@ -29,12 +42,44 @@
 
   <div class="app-main">
     <header class="topbar">
-      <button class="topbar-toggle icon-btn" id="sidebar-toggle" aria-label="Abrir menú"><span class="material-symbols-rounded">menu</span></button>
-      <div class="topbar-search"><span class="material-symbols-rounded">search</span><input type="search" placeholder="Buscar..." aria-label="Buscar"></div>
+      <div class="topbar-search" id="global-search">
+        <span class="material-symbols-rounded">search</span>
+        <input type="search" id="global-search-input" placeholder="Buscar pacientes, campañas, médicos..." aria-label="Buscar" autocomplete="off">
+        <div class="global-search-results" id="global-search-results"></div>
+      </div>
       <div class="topbar-actions">
-        <div class="connection-status connection-status--online"><span class="connection-dot"></span> Sincronizado</div>
-        <button class="icon-btn" aria-label="Notificaciones"><span class="material-symbols-rounded">notifications</span></button>
-        <div class="avatar avatar-sm">MC</div>
+        <div class="connection-status connection-status--online" id="connection-badge" aria-live="polite">
+          <span class="connection-dot"></span> <span id="connection-text">Sincronizado</span>
+        </div>
+        <button class="icon-btn" aria-label="Notificaciones (3 pendientes)">
+          <span class="material-symbols-rounded">notifications</span>
+          <span class="badge-count">3</span>
+        </button>
+
+        <div class="user-menu" id="user-menu">
+          <button class="user-menu-trigger" id="user-menu-trigger" aria-haspopup="true" aria-expanded="false" aria-label="Abrir menú de usuario">
+            <div class="avatar avatar-sm">MC</div>
+            <span class="material-symbols-rounded user-menu-caret">expand_more</span>
+          </button>
+          <div class="user-menu-dropdown">
+            <div class="user-menu-header">
+              <div class="avatar avatar-md">MC</div>
+              <div class="user-menu-identity">
+                <strong>María Coordinadora</strong>
+                <span>coordinadora@brigadamedica.test</span>
+                <div class="user-menu-roles"><span class="chip chip-confirmado">Coordinador</span></div>
+              </div>
+            </div>
+            <div class="user-menu-divider"></div>
+            <a href="configuracion.html" class="user-menu-item">
+              <span class="material-symbols-rounded">person</span> Ver mi perfil
+            </a>
+            <div class="user-menu-divider"></div>
+            <a href="login.html" class="user-menu-item user-menu-item--danger">
+              <span class="material-symbols-rounded">logout</span> Cerrar sesión
+            </a>
+          </div>
+        </div>
       </div>
     </header>
 
@@ -43,43 +88,79 @@
         <a href="noticias.html" class="btn btn-ghost btn-sm" style="margin-bottom:var(--space-sm)">
           <span class="material-symbols-rounded">arrow_back</span> Volver
         </a>
-        <h1>Publicar noticia</h1>
-        <p class="page-subtitle">Comunicado para la comunidad y brigadistas</p>
+        <h1>Nueva noticia</h1>
+        <p class="page-subtitle">Comunicado para la comunidad</p>
       </header>
 
-      <div class="card" style="max-width:640px">
-        <form id="form-noticia">
+      <div class="card" style="max-width:680px">
+        <form id="form-noticia" novalidate>
           <div class="form-group">
             <label class="form-label" for="titulo">Título</label>
-            <input type="text" id="titulo" class="form-control" placeholder="Título del comunicado" required>
+            <input type="text" id="titulo" class="form-control" placeholder="Ej. Nueva jornada de vacunación en Bastión Popular" required>
           </div>
           <div class="form-group">
-            <label class="form-label" for="fecha">Fecha de publicación</label>
-            <input type="date" id="fecha" class="form-control" required>
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="resumen">Resumen</label>
-            <textarea id="resumen" class="form-control" placeholder="Breve descripción visible en el listado..." required></textarea>
+            <label class="form-label" for="resumen">Resumen breve</label>
+            <input type="text" id="resumen" class="form-control" placeholder="Se muestra en las tarjetas de noticias" required>
           </div>
           <div class="form-group">
             <label class="form-label" for="contenido">Contenido completo</label>
-            <textarea id="contenido" class="form-control" style="min-height:160px" placeholder="Texto completo del comunicado..." required></textarea>
+            <textarea id="contenido" class="form-control" rows="6" placeholder="Redacta el comunicado completo..." required></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="imagen_url">URL de imagen (opcional)</label>
+            <input type="url" id="imagen_url" class="form-control" placeholder="https://...">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="fecha_publicacion">Fecha de publicación</label>
+            <input type="date" id="fecha_publicacion" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label style="display:flex;align-items:center;gap:10px;cursor:pointer">
+              <input type="checkbox" id="publicada" style="width:18px;height:18px">
+              Publicar de inmediato
+            </label>
           </div>
           <div style="display:flex;gap:var(--space-sm);margin-top:var(--space-lg)">
             <a href="noticias.html" class="btn btn-outline">Cancelar</a>
-            <button type="submit" class="btn btn-primary">Publicar</button>
+            <button type="submit" class="btn btn-primary">Publicar noticia</button>
           </div>
         </form>
       </div>
     </main>
   </div>
 
+  <nav class="bottom-nav" aria-label="Navegación inferior">
+    <a href="dashboard.html" class="bottom-nav-item" aria-label="Inicio">
+      <span class="material-symbols-rounded">home</span>
+      Inicio
+    </a>
+    <a href="brigadas.html" class="bottom-nav-item" aria-label="Campañas">
+      <span class="material-symbols-rounded">groups</span>
+      Campañas
+    </a>
+    <div class="bottom-nav-spacer" aria-hidden="true"></div>
+    <a href="pacientes.html" class="bottom-nav-item" aria-label="Pacientes">
+      <span class="material-symbols-rounded">personal_injury</span>
+      Pacientes
+    </a>
+    <a href="noticias.html" class="bottom-nav-item is-active" aria-label="Notificaciones">
+      <span class="material-symbols-rounded">notifications</span>
+      Alertas
+    </a>
+
+    <button class="bottom-nav-menu-btn" id="sidebar-toggle" aria-label="Abrir menú completo">
+      <span class="material-symbols-rounded">menu</span>
+    </button>
+  </nav>
+
   <script src="js/app.js"></script>
   <script>
+    setActiveNav('noticias');
+    document.getElementById('fecha_publicacion').value = new Date().toISOString().slice(0, 10);
     document.getElementById('form-noticia').addEventListener('submit', function(e) {
       e.preventDefault();
-      showToast('Noticia publicada correctamente');
-      setTimeout(() => window.location.href = 'noticias.html', 1000);
+      showToast('Noticia creada correctamente.');
+      setTimeout(() => window.location.href = 'noticias.html', 800);
     });
   </script>
 </body>

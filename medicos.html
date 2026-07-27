@@ -3,23 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BrigadaSalud — Médicos</title>
+  <title>BrigadaMedica — Médicos</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body class="app-layout">
 
   <aside class="sidebar" id="sidebar">
-    <div class="sidebar-brand"><span class="material-symbols-rounded">medical_services</span> BrigadaSalud</div>
-    <nav class="sidebar-nav">
+    <div class="sidebar-brand"><span class="material-symbols-rounded">medical_services</span> BrigadaMedica</div>
+    <nav class="sidebar-nav" aria-label="Navegación principal">
       <a href="dashboard.html" class="sidebar-link" data-page="dashboard"><span class="material-symbols-rounded">home</span> Dashboard</a>
-      <a href="brigadas.html" class="sidebar-link" data-page="brigadas"><span class="material-symbols-rounded">groups</span> Brigadas</a>
-      <a href="pacientes.html" class="sidebar-link" data-page="pacientes"><span class="material-symbols-rounded">personal_injury</span> Pacientes</a>
-      <a href="medicos.html" class="sidebar-link is-active" data-page="medicos"><span class="material-symbols-rounded">stethoscope</span> Médicos</a>
-      <a href="brigadistas.html" class="sidebar-link" data-page="brigadistas"><span class="material-symbols-rounded">volunteer_activism</span> Brigadistas</a>
-      <a href="comunidades.html" class="sidebar-link" data-page="comunidades"><span class="material-symbols-rounded">location_city</span> Comunidades</a>
-      <a href="reportes.html" class="sidebar-link" data-page="reportes"><span class="material-symbols-rounded">bar_chart</span> Reportes</a>
-      <a href="noticias.html" class="sidebar-link" data-page="noticias"><span class="material-symbols-rounded">newspaper</span> Noticias</a>
-      <a href="configuracion.html" class="sidebar-link" data-page="configuracion"><span class="material-symbols-rounded">settings</span> Configuración</a>
+
+      <div class="sidebar-section">
+        <div class="sidebar-section-label">Operación</div>
+        <a href="brigadas.html" class="sidebar-link" data-page="brigadas"><span class="material-symbols-rounded">groups</span> Campañas</a>
+        <a href="pacientes.html" class="sidebar-link" data-page="pacientes"><span class="material-symbols-rounded">personal_injury</span> Pacientes</a>
+        <a href="medicos.html" class="sidebar-link is-active" data-page="medicos"><span class="material-symbols-rounded">stethoscope</span> Médicos</a>
+        <a href="brigadistas.html" class="sidebar-link" data-page="brigadistas"><span class="material-symbols-rounded">volunteer_activism</span> Brigadistas</a>
+        <a href="comunidades.html" class="sidebar-link" data-page="comunidades"><span class="material-symbols-rounded">location_city</span> Comunidades</a>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-section-label">Análisis</div>
+        <a href="reportes.html" class="sidebar-link" data-page="reportes"><span class="material-symbols-rounded">bar_chart</span> Reportes</a>
+        <a href="noticias.html" class="sidebar-link" data-page="noticias"><span class="material-symbols-rounded">newspaper</span> Noticias</a>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-section-label">Administración</div>
+        <a href="usuarios.html" class="sidebar-link" data-page="usuarios"><span class="material-symbols-rounded">manage_accounts</span> Usuarios</a>
+        <a href="configuracion.html" class="sidebar-link" data-page="configuracion"><span class="material-symbols-rounded">settings</span> Configuración</a>
+      </div>
     </nav>
     <div class="sidebar-footer">
       <a href="login.html" class="sidebar-link sidebar-link--logout"><span class="material-symbols-rounded">logout</span> Cerrar sesión</a>
@@ -29,12 +42,44 @@
 
   <div class="app-main">
     <header class="topbar">
-      <button class="topbar-toggle icon-btn" id="sidebar-toggle" aria-label="Abrir menú"><span class="material-symbols-rounded">menu</span></button>
-      <div class="topbar-search"><span class="material-symbols-rounded">search</span><input type="search" placeholder="Buscar médicos..." aria-label="Buscar"></div>
+      <div class="topbar-search" id="global-search">
+        <span class="material-symbols-rounded">search</span>
+        <input type="search" id="global-search-input" placeholder="Buscar pacientes, campañas, médicos..." aria-label="Buscar" autocomplete="off">
+        <div class="global-search-results" id="global-search-results"></div>
+      </div>
       <div class="topbar-actions">
-        <div class="connection-status connection-status--online"><span class="connection-dot"></span> Sincronizado</div>
-        <button class="icon-btn" aria-label="Notificaciones"><span class="material-symbols-rounded">notifications</span></button>
-        <div class="avatar avatar-sm">MC</div>
+        <div class="connection-status connection-status--online" id="connection-badge" aria-live="polite">
+          <span class="connection-dot"></span> <span id="connection-text">Sincronizado</span>
+        </div>
+        <button class="icon-btn" aria-label="Notificaciones (3 pendientes)">
+          <span class="material-symbols-rounded">notifications</span>
+          <span class="badge-count">3</span>
+        </button>
+
+        <div class="user-menu" id="user-menu">
+          <button class="user-menu-trigger" id="user-menu-trigger" aria-haspopup="true" aria-expanded="false" aria-label="Abrir menú de usuario">
+            <div class="avatar avatar-sm">MC</div>
+            <span class="material-symbols-rounded user-menu-caret">expand_more</span>
+          </button>
+          <div class="user-menu-dropdown">
+            <div class="user-menu-header">
+              <div class="avatar avatar-md">MC</div>
+              <div class="user-menu-identity">
+                <strong>María Coordinadora</strong>
+                <span>coordinadora@brigadamedica.test</span>
+                <div class="user-menu-roles"><span class="chip chip-confirmado">Coordinador</span></div>
+              </div>
+            </div>
+            <div class="user-menu-divider"></div>
+            <a href="configuracion.html" class="user-menu-item">
+              <span class="material-symbols-rounded">person</span> Ver mi perfil
+            </a>
+            <div class="user-menu-divider"></div>
+            <a href="login.html" class="user-menu-item user-menu-item--danger">
+              <span class="material-symbols-rounded">logout</span> Cerrar sesión
+            </a>
+          </div>
+        </div>
       </div>
     </header>
 
@@ -42,45 +87,153 @@
       <header class="page-header flex-between">
         <div>
           <h1>Médicos</h1>
-          <p class="page-subtitle">Profesionales asignados a las brigadas</p>
+          <p class="page-subtitle">Personal médico registrado en el sistema</p>
         </div>
-        <a href="medico-form.html" class="btn btn-primary btn-sm">+ Agregar médico</a>
+        <a href="medico-form.html" class="btn btn-primary">
+          <span class="material-symbols-rounded">add</span> Nuevo médico
+        </a>
       </header>
 
-      <div class="card-grid">
-        <article class="medico-card">
-          <div class="avatar avatar-md">DR</div>
-          <h3 class="medico-card-name">Dra. Rosa Pérez</h3>
-          <span class="chip chip-especialidad-mg">Medicina General</span>
-          <p class="medico-card-disponible">● Disponible</p>
-          <a href="medico-form.html" class="btn btn-outline btn-sm">Ver perfil</a>
-        </article>
-        <article class="medico-card">
-          <div class="avatar avatar-md">JM</div>
-          <h3 class="medico-card-name">Dr. Juan Morales</h3>
-          <span class="chip chip-especialidad-odo">Odontología</span>
-          <p class="medico-card-disponible">● Disponible</p>
-          <a href="medico-form.html" class="btn btn-outline btn-sm">Ver perfil</a>
-        </article>
-        <article class="medico-card">
-          <div class="avatar avatar-md">LC</div>
-          <h3 class="medico-card-name">Dra. Laura Castro</h3>
-          <span class="chip chip-especialidad-ped">Pediatría</span>
-          <p class="medico-card-disponible" style="color:var(--color-warning)">● Ocupada</p>
-          <a href="medico-form.html" class="btn btn-outline btn-sm">Ver perfil</a>
-        </article>
-        <article class="medico-card">
-          <div class="avatar avatar-md">AF</div>
-          <h3 class="medico-card-name">Dra. Ana Flores</h3>
-          <span class="chip chip-especialidad-gin">Ginecología</span>
-          <p class="medico-card-disponible">● Disponible</p>
-          <a href="medico-form.html" class="btn btn-outline btn-sm">Ver perfil</a>
-        </article>
+      <div class="search-input-wrap" style="margin-bottom:var(--space-md)">
+        <span class="material-symbols-rounded">search</span>
+        <input type="search" class="form-control" placeholder="Buscar en esta página por nombre o credencial..." aria-label="Buscar médicos" id="search-medicos">
+      </div>
+
+      <div class="table-responsive">
+        <table class="data-table" id="tabla-medicos">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Credencial CMP</th>
+              <th>Especialidad</th>
+              <th>Teléfono</th>
+              <th>Disponible</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="tabla-medicos-body">
+            <tr>
+              <td data-label="Nombre"><strong>Dra. Rosa Pérez</strong></td>
+              <td data-label="Credencial CMP">CMP-1001</td>
+              <td data-label="Especialidad"><span class="chip chip-especialidad-mg">Medicina General</span></td>
+              <td data-label="Teléfono">0991234567</td>
+              <td data-label="Disponible"><span class="chip chip-atendido">Disponible</span></td>
+              <td data-label="Acciones">
+                <div style="display:flex;gap:8px">
+                  <a href="medico-form.html" class="btn btn-outline btn-sm">Editar</a>
+                  <button type="button" class="btn btn-outline btn-sm" data-eliminar-nombre="Dra. Rosa Pérez">Eliminar</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td data-label="Nombre"><strong>Dr. Juan Morales</strong></td>
+              <td data-label="Credencial CMP">CMP-1002</td>
+              <td data-label="Especialidad"><span class="chip chip-especialidad-odo">Odontología</span></td>
+              <td data-label="Teléfono">0987654321</td>
+              <td data-label="Disponible"><span class="chip chip-atendido">Disponible</span></td>
+              <td data-label="Acciones">
+                <div style="display:flex;gap:8px">
+                  <a href="medico-form.html" class="btn btn-outline btn-sm">Editar</a>
+                  <button type="button" class="btn btn-outline btn-sm" data-eliminar-nombre="Dr. Juan Morales">Eliminar</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td data-label="Nombre"><strong>Dra. Laura Castro</strong></td>
+              <td data-label="Credencial CMP">CMP-1003</td>
+              <td data-label="Especialidad"><span class="chip chip-especialidad-ped">Pediatría</span></td>
+              <td data-label="Teléfono">0976543210</td>
+              <td data-label="Disponible"><span class="chip chip-espera">No disponible</span></td>
+              <td data-label="Acciones">
+                <div style="display:flex;gap:8px">
+                  <a href="medico-form.html" class="btn btn-outline btn-sm">Editar</a>
+                  <button type="button" class="btn btn-outline btn-sm" data-eliminar-nombre="Dra. Laura Castro">Eliminar</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td data-label="Nombre"><strong>Dra. Ana Flores</strong></td>
+              <td data-label="Credencial CMP">CMP-1004</td>
+              <td data-label="Especialidad"><span class="chip chip-especialidad-gin">Ginecología</span></td>
+              <td data-label="Teléfono">0965432109</td>
+              <td data-label="Disponible"><span class="chip chip-atendido">Disponible</span></td>
+              <td data-label="Acciones">
+                <div style="display:flex;gap:8px">
+                  <a href="medico-form.html" class="btn btn-outline btn-sm">Editar</a>
+                  <button type="button" class="btn btn-outline btn-sm" data-eliminar-nombre="Dra. Ana Flores">Eliminar</button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="pagination">
+        <span>Mostrando 1–4 de 18 médicos</span>
+        <div class="pagination-btns">
+          <button class="btn btn-outline btn-sm" disabled>Anterior</button>
+          <button class="btn btn-outline btn-sm">Siguiente</button>
+        </div>
       </div>
     </main>
   </div>
 
+  <nav class="bottom-nav" aria-label="Navegación inferior">
+    <a href="dashboard.html" class="bottom-nav-item" aria-label="Inicio">
+      <span class="material-symbols-rounded">home</span>
+      Inicio
+    </a>
+    <a href="brigadas.html" class="bottom-nav-item" aria-label="Campañas">
+      <span class="material-symbols-rounded">groups</span>
+      Campañas
+    </a>
+    <div class="bottom-nav-spacer" aria-hidden="true"></div>
+    <a href="pacientes.html" class="bottom-nav-item" aria-label="Pacientes">
+      <span class="material-symbols-rounded">personal_injury</span>
+      Pacientes
+    </a>
+    <a href="noticias.html" class="bottom-nav-item" aria-label="Notificaciones">
+      <span class="material-symbols-rounded">notifications</span>
+      Alertas
+    </a>
+
+    <button class="bottom-nav-menu-btn" id="sidebar-toggle" aria-label="Abrir menú completo">
+      <span class="material-symbols-rounded">menu</span>
+    </button>
+  </nav>
+
+  <div class="modal-overlay" id="modal-eliminar">
+    <div class="modal" role="dialog">
+      <h2 class="modal-title">Eliminar médico</h2>
+      <div class="modal-body">
+        <p>¿Seguro que deseas eliminar a <strong id="eliminar-nombre"></strong>? Esta acción no se puede deshacer.</p>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-ghost" data-modal-close>Cancelar</button>
+        <button type="button" class="btn btn-primary" style="background:var(--color-error)" id="btn-confirmar-eliminar">Eliminar</button>
+      </div>
+    </div>
+  </div>
+
   <script src="js/app.js"></script>
-  <script>setActiveNav('medicos');</script>
+  <script>
+    setActiveNav('medicos');
+    initTableSearch('#tabla-medicos', '#search-medicos');
+
+    let filaAEliminar = null;
+    document.querySelectorAll('[data-eliminar-nombre]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        filaAEliminar = btn.closest('tr');
+        document.getElementById('eliminar-nombre').textContent = btn.dataset.eliminarNombre;
+        document.getElementById('modal-eliminar').classList.add('is-open');
+      });
+    });
+
+    document.getElementById('btn-confirmar-eliminar').addEventListener('click', () => {
+      document.getElementById('modal-eliminar').classList.remove('is-open');
+      filaAEliminar?.remove();
+      showToast('Médico eliminado correctamente.');
+    });
+  </script>
 </body>
 </html>

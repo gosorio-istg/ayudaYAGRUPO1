@@ -3,23 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BrigadaSalud — Reportes</title>
+  <title>BrigadaMedica — Reportes</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body class="app-layout">
 
   <aside class="sidebar" id="sidebar">
-    <div class="sidebar-brand"><span class="material-symbols-rounded">medical_services</span> BrigadaSalud</div>
-    <nav class="sidebar-nav">
+    <div class="sidebar-brand"><span class="material-symbols-rounded">medical_services</span> BrigadaMedica</div>
+    <nav class="sidebar-nav" aria-label="Navegación principal">
       <a href="dashboard.html" class="sidebar-link" data-page="dashboard"><span class="material-symbols-rounded">home</span> Dashboard</a>
-      <a href="brigadas.html" class="sidebar-link" data-page="brigadas"><span class="material-symbols-rounded">groups</span> Brigadas</a>
-      <a href="pacientes.html" class="sidebar-link" data-page="pacientes"><span class="material-symbols-rounded">personal_injury</span> Pacientes</a>
-      <a href="medicos.html" class="sidebar-link" data-page="medicos"><span class="material-symbols-rounded">stethoscope</span> Médicos</a>
-      <a href="brigadistas.html" class="sidebar-link" data-page="brigadistas"><span class="material-symbols-rounded">volunteer_activism</span> Brigadistas</a>
-      <a href="comunidades.html" class="sidebar-link" data-page="comunidades"><span class="material-symbols-rounded">location_city</span> Comunidades</a>
-      <a href="reportes.html" class="sidebar-link is-active" data-page="reportes"><span class="material-symbols-rounded">bar_chart</span> Reportes</a>
-      <a href="noticias.html" class="sidebar-link" data-page="noticias"><span class="material-symbols-rounded">newspaper</span> Noticias</a>
-      <a href="configuracion.html" class="sidebar-link" data-page="configuracion"><span class="material-symbols-rounded">settings</span> Configuración</a>
+
+      <div class="sidebar-section">
+        <div class="sidebar-section-label">Operación</div>
+        <a href="brigadas.html" class="sidebar-link" data-page="brigadas"><span class="material-symbols-rounded">groups</span> Campañas</a>
+        <a href="pacientes.html" class="sidebar-link" data-page="pacientes"><span class="material-symbols-rounded">personal_injury</span> Pacientes</a>
+        <a href="medicos.html" class="sidebar-link" data-page="medicos"><span class="material-symbols-rounded">stethoscope</span> Médicos</a>
+        <a href="brigadistas.html" class="sidebar-link" data-page="brigadistas"><span class="material-symbols-rounded">volunteer_activism</span> Brigadistas</a>
+        <a href="comunidades.html" class="sidebar-link" data-page="comunidades"><span class="material-symbols-rounded">location_city</span> Comunidades</a>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-section-label">Análisis</div>
+        <a href="reportes.html" class="sidebar-link is-active" data-page="reportes"><span class="material-symbols-rounded">bar_chart</span> Reportes</a>
+        <a href="noticias.html" class="sidebar-link" data-page="noticias"><span class="material-symbols-rounded">newspaper</span> Noticias</a>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-section-label">Administración</div>
+        <a href="usuarios.html" class="sidebar-link" data-page="usuarios"><span class="material-symbols-rounded">manage_accounts</span> Usuarios</a>
+        <a href="configuracion.html" class="sidebar-link" data-page="configuracion"><span class="material-symbols-rounded">settings</span> Configuración</a>
+      </div>
     </nav>
     <div class="sidebar-footer">
       <a href="login.html" class="sidebar-link sidebar-link--logout"><span class="material-symbols-rounded">logout</span> Cerrar sesión</a>
@@ -29,12 +42,44 @@
 
   <div class="app-main">
     <header class="topbar">
-      <button class="topbar-toggle icon-btn" id="sidebar-toggle" aria-label="Abrir menú"><span class="material-symbols-rounded">menu</span></button>
-      <div class="topbar-search"><span class="material-symbols-rounded">search</span><input type="search" placeholder="Buscar..." aria-label="Buscar"></div>
+      <div class="topbar-search" id="global-search">
+        <span class="material-symbols-rounded">search</span>
+        <input type="search" id="global-search-input" placeholder="Buscar pacientes, campañas, médicos..." aria-label="Buscar" autocomplete="off">
+        <div class="global-search-results" id="global-search-results"></div>
+      </div>
       <div class="topbar-actions">
-        <div class="connection-status connection-status--online"><span class="connection-dot"></span> Sincronizado</div>
-        <button class="icon-btn" aria-label="Notificaciones"><span class="material-symbols-rounded">notifications</span></button>
-        <div class="avatar avatar-sm">MC</div>
+        <div class="connection-status connection-status--online" id="connection-badge" aria-live="polite">
+          <span class="connection-dot"></span> <span id="connection-text">Sincronizado</span>
+        </div>
+        <button class="icon-btn" aria-label="Notificaciones (3 pendientes)">
+          <span class="material-symbols-rounded">notifications</span>
+          <span class="badge-count">3</span>
+        </button>
+
+        <div class="user-menu" id="user-menu">
+          <button class="user-menu-trigger" id="user-menu-trigger" aria-haspopup="true" aria-expanded="false" aria-label="Abrir menú de usuario">
+            <div class="avatar avatar-sm">MC</div>
+            <span class="material-symbols-rounded user-menu-caret">expand_more</span>
+          </button>
+          <div class="user-menu-dropdown">
+            <div class="user-menu-header">
+              <div class="avatar avatar-md">MC</div>
+              <div class="user-menu-identity">
+                <strong>María Coordinadora</strong>
+                <span>coordinadora@brigadamedica.test</span>
+                <div class="user-menu-roles"><span class="chip chip-confirmado">Coordinador</span></div>
+              </div>
+            </div>
+            <div class="user-menu-divider"></div>
+            <a href="configuracion.html" class="user-menu-item">
+              <span class="material-symbols-rounded">person</span> Ver mi perfil
+            </a>
+            <div class="user-menu-divider"></div>
+            <a href="login.html" class="user-menu-item user-menu-item--danger">
+              <span class="material-symbols-rounded">logout</span> Cerrar sesión
+            </a>
+          </div>
+        </div>
       </div>
     </header>
 
@@ -42,97 +87,124 @@
       <header class="page-header flex-between">
         <div>
           <h1>Reportes</h1>
-          <p class="page-subtitle">Estadísticas y exportación por período</p>
+          <p class="page-subtitle">Indicadores de atención de las campañas médicas</p>
         </div>
-        <button class="btn btn-secondary btn-sm" id="btn-export">
-          <span class="material-symbols-rounded" style="font-size:18px">download</span> Exportar
-        </button>
+        <select class="form-control" id="filtro-brigada" style="max-width:280px">
+          <option value="">Todas las campañas</option>
+          <option value="1">Campaña Bastión Popular</option>
+          <option value="2">Jornada Entrada de la 8</option>
+          <option value="3">Brigada Flor de Bastión</option>
+        </select>
       </header>
 
-      <div style="display:flex;gap:var(--space-md);flex-wrap:wrap;margin-bottom:var(--space-lg)">
-        <div class="form-group" style="margin:0;min-width:160px">
-          <label class="form-label" for="fecha-desde">Desde</label>
-          <input type="date" id="fecha-desde" class="form-control" value="2026-07-01">
-        </div>
-        <div class="form-group" style="margin:0;min-width:160px">
-          <label class="form-label" for="fecha-hasta">Hasta</label>
-          <input type="date" id="fecha-hasta" class="form-control" value="2026-07-20">
-        </div>
-        <div class="form-group" style="margin:0;min-width:180px">
-          <label class="form-label" for="filtro-tipo">Filtrar por</label>
-          <select id="filtro-tipo" class="form-control">
-            <option>Brigada</option>
-            <option>Sector</option>
-            <option>Especialidad</option>
-          </select>
-        </div>
-      </div>
-
       <section class="section-block">
-        <div class="grid-3">
-          <div class="stat-card">
+        <div class="stat-grid" id="stat-grid">
+          <div class="stat-card" data-reveal>
+            <div class="stat-card-value">386</div>
+            <div class="stat-card-label">Turnos totales</div>
+          </div>
+          <div class="stat-card" data-reveal>
             <div class="stat-card-value">342</div>
             <div class="stat-card-label">Total atendidos</div>
           </div>
-          <div class="stat-card">
-            <div class="stat-card-value">Medicina General</div>
-            <div class="stat-card-label">Especialidad más demandada</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-card-value">8</div>
-            <div class="stat-card-label">Brigadas del período</div>
+          <div class="stat-card" data-reveal>
+            <div class="stat-card-value">14 min</div>
+            <div class="stat-card-label">Espera promedio</div>
           </div>
         </div>
       </section>
 
-      <div class="grid-2">
-        <div class="card">
-          <h2 class="section-title">Atenciones por brigada</h2>
-          <div class="chart-bars">
+      <section class="section-block">
+        <h2 class="section-title">Atenciones por especialidad</h2>
+        <div class="card" data-reveal>
+          <div class="chart-bars" id="chart-especialidades">
             <div class="chart-bar-item">
-              <div class="chart-bar" style="height:120px"></div>
-              <span class="chart-bar-label">Entrada 8</span>
+              <div class="chart-bar" style="height:150px" data-value="140"></div>
+              <span class="chart-bar-label">Med. General</span>
             </div>
             <div class="chart-bar-item">
-              <div class="chart-bar" style="height:90px;background:var(--color-secondary)"></div>
-              <span class="chart-bar-label">Bastión</span>
+              <div class="chart-bar" style="height:96px;background:var(--color-secondary)" data-value="90"></div>
+              <span class="chart-bar-label">Odontología</span>
             </div>
             <div class="chart-bar-item">
-              <div class="chart-bar" style="height:70px;background:var(--color-accent)"></div>
-              <span class="chart-bar-label">Flor</span>
+              <div class="chart-bar" style="height:75px;background:var(--color-accent)" data-value="70"></div>
+              <span class="chart-bar-label">Pediatría</span>
             </div>
             <div class="chart-bar-item">
-              <div class="chart-bar" style="height:62px;background:#7B1FA2"></div>
-              <span class="chart-bar-label">Balerio</span>
+              <div class="chart-bar" style="height:53px;background:#C2185B" data-value="50"></div>
+              <span class="chart-bar-label">Ginecología</span>
+            </div>
+            <div class="chart-bar-item">
+              <div class="chart-bar" style="height:39px;background:#2E7D32" data-value="36"></div>
+              <span class="chart-bar-label">Nutrición</span>
             </div>
           </div>
         </div>
+      </section>
 
-        <div class="table-wrap">
-          <table class="data-table">
+      <section class="section-block">
+        <h2 class="section-title">Distribución por sector</h2>
+        <div class="table-responsive">
+          <table class="data-table" id="tabla-sectores">
             <thead>
               <tr>
-                <th>Brigada</th>
                 <th>Sector</th>
-                <th>Atenciones</th>
+                <th>Turnos totales</th>
+                <th>Atendidos</th>
+                <th>Pacientes únicos</th>
               </tr>
             </thead>
-            <tbody>
-              <tr><td>Jornada Entrada de la 8</td><td>Entrada de la 8</td><td>98</td></tr>
-              <tr><td>Campaña Bastión Popular</td><td>Bastión Popular</td><td>76</td></tr>
-              <tr><td>Brigada Flor de Bastión</td><td>Flor de Bastión</td><td>54</td></tr>
-              <tr><td>Jornada Balerio Estacio</td><td>Coop. Balerio Estacio</td><td>62</td></tr>
+            <tbody id="tabla-sectores-body">
+              <tr><td data-label="Sector"><strong>Entrada de la 8</strong></td><td data-label="Turnos totales">98</td><td data-label="Atendidos">90</td><td data-label="Pacientes únicos">84</td></tr>
+              <tr><td data-label="Sector"><strong>Bastión Popular</strong></td><td data-label="Turnos totales">142</td><td data-label="Atendidos">128</td><td data-label="Pacientes únicos">120</td></tr>
+              <tr><td data-label="Sector"><strong>Flor de Bastión</strong></td><td data-label="Turnos totales">86</td><td data-label="Atendidos">75</td><td data-label="Pacientes únicos">70</td></tr>
+              <tr><td data-label="Sector"><strong>Coop. Balerio Estacio</strong></td><td data-label="Turnos totales">60</td><td data-label="Atendidos">49</td><td data-label="Pacientes únicos">45</td></tr>
             </tbody>
           </table>
         </div>
-      </div>
+      </section>
     </main>
   </div>
+
+  <nav class="bottom-nav" aria-label="Navegación inferior">
+    <a href="dashboard.html" class="bottom-nav-item" aria-label="Inicio">
+      <span class="material-symbols-rounded">home</span>
+      Inicio
+    </a>
+    <a href="brigadas.html" class="bottom-nav-item" aria-label="Campañas">
+      <span class="material-symbols-rounded">groups</span>
+      Campañas
+    </a>
+    <div class="bottom-nav-spacer" aria-hidden="true"></div>
+    <a href="pacientes.html" class="bottom-nav-item" aria-label="Pacientes">
+      <span class="material-symbols-rounded">personal_injury</span>
+      Pacientes
+    </a>
+    <a href="noticias.html" class="bottom-nav-item" aria-label="Notificaciones">
+      <span class="material-symbols-rounded">notifications</span>
+      Alertas
+    </a>
+
+    <button class="bottom-nav-menu-btn" id="sidebar-toggle" aria-label="Abrir menú completo">
+      <span class="material-symbols-rounded">menu</span>
+    </button>
+  </nav>
 
   <script src="js/app.js"></script>
   <script>
     setActiveNav('reportes');
-    document.getElementById('btn-export').addEventListener('click', () => showToast('Reporte exportado correctamente'));
+    document.getElementById('filtro-brigada').addEventListener('change', function () {
+      showToast(this.value ? 'Reporte filtrado por campaña.' : 'Mostrando todas las campañas.');
+    });
+    initRevealAnimations();
+    function initRevealAnimations() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) entry.target.classList.add('revealed');
+        });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('[data-reveal]').forEach(el => observer.observe(el));
+    }
   </script>
 </body>
 </html>

@@ -3,26 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BrigadaSalud — Dashboard</title>
+  <title>BrigadaMedica — Dashboard</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body class="app-layout">
 
   <aside class="sidebar" id="sidebar">
-    <div class="sidebar-brand">
-      <span class="material-symbols-rounded">medical_services</span>
-      BrigadaSalud
-    </div>
+    <div class="sidebar-brand"><span class="material-symbols-rounded">medical_services</span> BrigadaMedica</div>
     <nav class="sidebar-nav" aria-label="Navegación principal">
       <a href="dashboard.html" class="sidebar-link is-active" data-page="dashboard"><span class="material-symbols-rounded">home</span> Dashboard</a>
-      <a href="brigadas.html" class="sidebar-link" data-page="brigadas"><span class="material-symbols-rounded">groups</span> Brigadas</a>
-      <a href="pacientes.html" class="sidebar-link" data-page="pacientes"><span class="material-symbols-rounded">personal_injury</span> Pacientes</a>
-      <a href="medicos.html" class="sidebar-link" data-page="medicos"><span class="material-symbols-rounded">stethoscope</span> Médicos</a>
-      <a href="brigadistas.html" class="sidebar-link" data-page="brigadistas"><span class="material-symbols-rounded">volunteer_activism</span> Brigadistas</a>
-      <a href="comunidades.html" class="sidebar-link" data-page="comunidades"><span class="material-symbols-rounded">location_city</span> Comunidades</a>
-      <a href="reportes.html" class="sidebar-link" data-page="reportes"><span class="material-symbols-rounded">bar_chart</span> Reportes</a>
-      <a href="noticias.html" class="sidebar-link" data-page="noticias"><span class="material-symbols-rounded">newspaper</span> Noticias</a>
-      <a href="configuracion.html" class="sidebar-link" data-page="configuracion"><span class="material-symbols-rounded">settings</span> Configuración</a>
+
+      <div class="sidebar-section">
+        <div class="sidebar-section-label">Operación</div>
+        <a href="brigadas.html" class="sidebar-link" data-page="brigadas"><span class="material-symbols-rounded">groups</span> Campañas</a>
+        <a href="pacientes.html" class="sidebar-link" data-page="pacientes"><span class="material-symbols-rounded">personal_injury</span> Pacientes</a>
+        <a href="medicos.html" class="sidebar-link" data-page="medicos"><span class="material-symbols-rounded">stethoscope</span> Médicos</a>
+        <a href="brigadistas.html" class="sidebar-link" data-page="brigadistas"><span class="material-symbols-rounded">volunteer_activism</span> Brigadistas</a>
+        <a href="comunidades.html" class="sidebar-link" data-page="comunidades"><span class="material-symbols-rounded">location_city</span> Comunidades</a>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-section-label">Análisis</div>
+        <a href="reportes.html" class="sidebar-link" data-page="reportes"><span class="material-symbols-rounded">bar_chart</span> Reportes</a>
+        <a href="noticias.html" class="sidebar-link" data-page="noticias"><span class="material-symbols-rounded">newspaper</span> Noticias</a>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-section-label">Administración</div>
+        <a href="usuarios.html" class="sidebar-link" data-page="usuarios"><span class="material-symbols-rounded">manage_accounts</span> Usuarios</a>
+        <a href="configuracion.html" class="sidebar-link" data-page="configuracion"><span class="material-symbols-rounded">settings</span> Configuración</a>
+      </div>
     </nav>
     <div class="sidebar-footer">
       <a href="login.html" class="sidebar-link sidebar-link--logout"><span class="material-symbols-rounded">logout</span> Cerrar sesión</a>
@@ -32,58 +42,70 @@
 
   <div class="app-main">
     <header class="topbar">
-      <button class="topbar-toggle icon-btn" id="sidebar-toggle" aria-label="Abrir menú">
-        <span class="material-symbols-rounded">menu</span>
-      </button>
-      <div class="topbar-search">
+      <div class="topbar-search" id="global-search">
         <span class="material-symbols-rounded">search</span>
-        <input type="search" placeholder="Buscar pacientes, brigadas..." aria-label="Buscar">
+        <input type="search" id="global-search-input" placeholder="Buscar pacientes, campañas, médicos..." aria-label="Buscar" autocomplete="off">
+        <div class="global-search-results" id="global-search-results"></div>
       </div>
       <div class="topbar-actions">
-        <div class="connection-status connection-status--online" aria-live="polite">
-          <span class="connection-dot"></span>
-          Sincronizado
+        <div class="connection-status connection-status--online" id="connection-badge" aria-live="polite">
+          <span class="connection-dot"></span> <span id="connection-text">Sincronizado</span>
         </div>
         <button class="icon-btn" aria-label="Notificaciones (3 pendientes)">
           <span class="material-symbols-rounded">notifications</span>
           <span class="badge-count">3</span>
         </button>
-        <div class="avatar avatar-sm" aria-label="Usuario: María Coordinadora">MC</div>
+
+        <div class="user-menu" id="user-menu">
+          <button class="user-menu-trigger" id="user-menu-trigger" aria-haspopup="true" aria-expanded="false" aria-label="Abrir menú de usuario">
+            <div class="avatar avatar-sm">MC</div>
+            <span class="material-symbols-rounded user-menu-caret">expand_more</span>
+          </button>
+          <div class="user-menu-dropdown">
+            <div class="user-menu-header">
+              <div class="avatar avatar-md">MC</div>
+              <div class="user-menu-identity">
+                <strong>María Coordinadora</strong>
+                <span>coordinadora@brigadamedica.test</span>
+                <div class="user-menu-roles"><span class="chip chip-confirmado">Coordinador</span></div>
+              </div>
+            </div>
+            <div class="user-menu-divider"></div>
+            <a href="configuracion.html" class="user-menu-item">
+              <span class="material-symbols-rounded">person</span> Ver mi perfil
+            </a>
+            <div class="user-menu-divider"></div>
+            <a href="login.html" class="user-menu-item user-menu-item--danger">
+              <span class="material-symbols-rounded">logout</span> Cerrar sesión
+            </a>
+          </div>
+        </div>
       </div>
     </header>
 
     <main class="page-content">
-      <div class="alert-banner">
-        <span class="material-symbols-rounded">warning</span>
-        Hoy tienes 2 cambios sin guardar en la brigada de Bastión Popular.
-      </div>
-
       <header class="page-header">
         <h1>Dashboard</h1>
-        <p class="page-subtitle">Resumen general de brigadas médicas comunitarias</p>
+        <p class="page-subtitle">Resumen general de campañas médicas comunitarias</p>
       </header>
 
       <section class="section-block">
-        <div class="grid-4">
-          <div class="stat-card">
+        <div class="stat-grid">
+          <div class="stat-card" data-reveal>
             <div class="stat-card-value">1,248</div>
             <div class="stat-card-label">Pacientes registrados</div>
-            <div class="stat-card-change positive">↑ 12% vs. mes anterior</div>
           </div>
-          <div class="stat-card">
-            <div class="stat-card-value">4</div>
-            <div class="stat-card-label">Brigadas activas</div>
-            <div class="stat-card-change positive">↑ 1 nueva esta semana</div>
+          <div class="stat-card" data-reveal>
+            <div class="stat-card-value">2</div>
+            <div class="stat-card-label">Campañas en curso</div>
           </div>
-          <div class="stat-card">
+          <div class="stat-card" data-reveal>
             <div class="stat-card-value">342</div>
-            <div class="stat-card-label">Atenciones del mes</div>
-            <div class="stat-card-change positive">↑ 8%</div>
+            <div class="stat-card-label">Total atendidos</div>
           </div>
-          <div class="stat-card">
+          <div class="stat-card" data-reveal>
             <div class="stat-card-value">18</div>
             <div class="stat-card-label">Médicos disponibles</div>
-            <div class="stat-card-change negative">↓ 2 de baja</div>
           </div>
         </div>
       </section>
@@ -91,29 +113,29 @@
       <div class="grid-2">
         <section class="section-block">
           <div class="flex-between">
-            <h2 class="section-title">Próximas brigadas</h2>
-            <a href="brigadas.html" class="btn btn-ghost btn-sm">Ver todas</a>
+            <h2 class="section-title">Próximas campañas</h2>
+            <a href="brigadas.html" class="btn btn-ghost btn-sm" style="white-space:nowrap">Ver todas</a>
           </div>
           <div class="card-grid">
-            <article class="brigada-card">
+            <article class="brigada-card" data-reveal>
               <div class="brigada-card-header">
                 <h3 class="brigada-card-title">Campaña Bastión Popular</h3>
                 <span class="chip chip-programada">Programada</span>
               </div>
               <div class="brigada-card-meta">
-                <span><span class="material-symbols-rounded" style="font-size:18px">calendar_month</span> 25 Jul 2026</span>
-                <span><span class="material-symbols-rounded" style="font-size:18px">location_on</span> Cooperativa Balerio Estacio</span>
+                <span><span class="material-symbols-rounded">calendar_month</span> 25 Jul 2026</span>
+                <span><span class="material-symbols-rounded">location_on</span> Cooperativa Balerio Estacio</span>
               </div>
               <a href="brigadas.html" class="btn btn-outline btn-sm">Ver detalles</a>
             </article>
-            <article class="brigada-card">
+            <article class="brigada-card" data-reveal>
               <div class="brigada-card-header">
                 <h3 class="brigada-card-title">Jornada Entrada de la 8</h3>
                 <span class="chip chip-en-curso">En curso</span>
               </div>
               <div class="brigada-card-meta">
-                <span><span class="material-symbols-rounded" style="font-size:18px">calendar_month</span> 20 Jul 2026</span>
-                <span><span class="material-symbols-rounded" style="font-size:18px">location_on</span> Av. Casuarina Mz 102</span>
+                <span><span class="material-symbols-rounded">calendar_month</span> 20 Jul 2026</span>
+                <span><span class="material-symbols-rounded">location_on</span> Av. Casuarina Mz 102</span>
               </div>
               <a href="brigadas.html" class="btn btn-outline btn-sm">Ver detalles</a>
             </article>
@@ -122,26 +144,26 @@
 
         <section class="section-block">
           <h2 class="section-title">Atenciones por especialidad</h2>
-          <div class="card">
+          <div class="card" data-reveal>
             <div class="chart-bars">
               <div class="chart-bar-item">
-                <div class="chart-bar" style="height:140px;background:#1565C0"></div>
+                <div class="chart-bar" style="height:140px;background:var(--color-primary)" data-value="420"></div>
                 <span class="chart-bar-label">Med. General</span>
               </div>
               <div class="chart-bar-item">
-                <div class="chart-bar" style="height:90px;background:#7B1FA2"></div>
+                <div class="chart-bar" style="height:90px;background:#7B1FA2" data-value="270"></div>
                 <span class="chart-bar-label">Odontología</span>
               </div>
               <div class="chart-bar-item">
-                <div class="chart-bar" style="height:110px;background:#E65100"></div>
+                <div class="chart-bar" style="height:110px;background:#E65100" data-value="330"></div>
                 <span class="chart-bar-label">Pediatría</span>
               </div>
               <div class="chart-bar-item">
-                <div class="chart-bar" style="height:70px;background:#C2185B"></div>
+                <div class="chart-bar" style="height:70px;background:#C2185B" data-value="210"></div>
                 <span class="chart-bar-label">Ginecología</span>
               </div>
               <div class="chart-bar-item">
-                <div class="chart-bar" style="height:55px;background:#2E7D32"></div>
+                <div class="chart-bar" style="height:55px;background:#2E7D32" data-value="165"></div>
                 <span class="chart-bar-label">Nutrición</span>
               </div>
             </div>
@@ -152,10 +174,10 @@
       <section class="section-block">
         <div class="flex-between">
           <h2 class="section-title">Noticias recientes</h2>
-          <a href="noticias.html" class="btn btn-ghost btn-sm">Ver todas</a>
+          <a href="noticias.html" class="btn btn-ghost btn-sm" style="white-space:nowrap">Ver todas</a>
         </div>
         <div class="card-grid">
-          <article class="noticia-card">
+          <article class="noticia-card" data-reveal>
             <div class="noticia-card-img"><span class="material-symbols-rounded">campaign</span></div>
             <div class="noticia-card-body">
               <time class="noticia-card-date">18 Jul 2026</time>
@@ -163,7 +185,7 @@
               <p class="noticia-card-desc">Se realizará el próximo sábado en el sector Entrada de la 8 con apoyo del MSP.</p>
             </div>
           </article>
-          <article class="noticia-card">
+          <article class="noticia-card" data-reveal>
             <div class="noticia-card-img"><span class="material-symbols-rounded">health_and_safety</span></div>
             <div class="noticia-card-body">
               <time class="noticia-card-date">15 Jul 2026</time>
@@ -176,7 +198,45 @@
     </main>
   </div>
 
+  <!-- Bottom Navigation Mobile -->
+  <nav class="bottom-nav" aria-label="Navegación inferior">
+    <a href="dashboard.html" class="bottom-nav-item is-active" aria-label="Inicio">
+      <span class="material-symbols-rounded">home</span>
+      Inicio
+    </a>
+    <a href="brigadas.html" class="bottom-nav-item" aria-label="Campañas">
+      <span class="material-symbols-rounded">groups</span>
+      Campañas
+    </a>
+    <div class="bottom-nav-spacer" aria-hidden="true"></div>
+    <a href="pacientes.html" class="bottom-nav-item" aria-label="Pacientes">
+      <span class="material-symbols-rounded">personal_injury</span>
+      Pacientes
+    </a>
+    <a href="noticias.html" class="bottom-nav-item" aria-label="Notificaciones">
+      <span class="material-symbols-rounded">notifications</span>
+      Alertas
+    </a>
+
+    <button class="bottom-nav-menu-btn" id="sidebar-toggle" aria-label="Abrir menú completo">
+      <span class="material-symbols-rounded">menu</span>
+    </button>
+  </nav>
+
   <script src="js/app.js"></script>
-  <script>setActiveNav('dashboard');</script>
+  <script>
+    setActiveNav('dashboard');
+    initRevealAnimations();
+    function initRevealAnimations() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+          }
+        });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('[data-reveal]').forEach(el => observer.observe(el));
+    }
+  </script>
 </body>
 </html>

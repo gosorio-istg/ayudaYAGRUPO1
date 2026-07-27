@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BrigadaMedica — Usuarios</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="app-layout">
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand"><span class="material-symbols-rounded">medical_services</span> BrigadaMedica</div>
+    <nav class="sidebar-nav" aria-label="Navegación principal">
+      <a href="dashboard.html" class="sidebar-link" data-page="dashboard"><span class="material-symbols-rounded">home</span> Dashboard</a>
+
+      <div class="sidebar-section">
+        <div class="sidebar-section-label">Operación</div>
+        <a href="brigadas.html" class="sidebar-link" data-page="brigadas"><span class="material-symbols-rounded">groups</span> Campañas</a>
+        <a href="pacientes.html" class="sidebar-link" data-page="pacientes"><span class="material-symbols-rounded">personal_injury</span> Pacientes</a>
+        <a href="medicos.html" class="sidebar-link" data-page="medicos"><span class="material-symbols-rounded">stethoscope</span> Médicos</a>
+        <a href="brigadistas.html" class="sidebar-link" data-page="brigadistas"><span class="material-symbols-rounded">volunteer_activism</span> Brigadistas</a>
+        <a href="comunidades.html" class="sidebar-link" data-page="comunidades"><span class="material-symbols-rounded">location_city</span> Comunidades</a>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-section-label">Análisis</div>
+        <a href="reportes.html" class="sidebar-link" data-page="reportes"><span class="material-symbols-rounded">bar_chart</span> Reportes</a>
+        <a href="noticias.html" class="sidebar-link" data-page="noticias"><span class="material-symbols-rounded">newspaper</span> Noticias</a>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-section-label">Administración</div>
+        <a href="usuarios.html" class="sidebar-link is-active" data-page="usuarios"><span class="material-symbols-rounded">manage_accounts</span> Usuarios</a>
+        <a href="configuracion.html" class="sidebar-link" data-page="configuracion"><span class="material-symbols-rounded">settings</span> Configuración</a>
+      </div>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="login.html" class="sidebar-link sidebar-link--logout"><span class="material-symbols-rounded">logout</span> Cerrar sesión</a>
+    </div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+  <div class="app-main">
+    <header class="topbar">
+      <div class="topbar-search" id="global-search">
+        <span class="material-symbols-rounded">search</span>
+        <input type="search" id="global-search-input" placeholder="Buscar pacientes, campañas, médicos..." aria-label="Buscar" autocomplete="off">
+        <div class="global-search-results" id="global-search-results"></div>
+      </div>
+      <div class="topbar-actions">
+        <div class="connection-status connection-status--online" id="connection-badge" aria-live="polite">
+          <span class="connection-dot"></span> <span id="connection-text">Sincronizado</span>
+        </div>
+        <button class="icon-btn" aria-label="Notificaciones (3 pendientes)">
+          <span class="material-symbols-rounded">notifications</span>
+          <span class="badge-count">3</span>
+        </button>
+
+        <div class="user-menu" id="user-menu">
+          <button class="user-menu-trigger" id="user-menu-trigger" aria-haspopup="true" aria-expanded="false" aria-label="Abrir menú de usuario">
+            <div class="avatar avatar-sm">MC</div>
+            <span class="material-symbols-rounded user-menu-caret">expand_more</span>
+          </button>
+          <div class="user-menu-dropdown">
+            <div class="user-menu-header">
+              <div class="avatar avatar-md">MC</div>
+              <div class="user-menu-identity">
+                <strong>María Coordinadora</strong>
+                <span>coordinadora@brigadamedica.test</span>
+                <div class="user-menu-roles"><span class="chip chip-confirmado">Coordinador</span></div>
+              </div>
+            </div>
+            <div class="user-menu-divider"></div>
+            <a href="configuracion.html" class="user-menu-item">
+              <span class="material-symbols-rounded">person</span> Ver mi perfil
+            </a>
+            <div class="user-menu-divider"></div>
+            <a href="login.html" class="user-menu-item user-menu-item--danger">
+              <span class="material-symbols-rounded">logout</span> Cerrar sesión
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="page-content">
+      <header class="page-header flex-between">
+        <div>
+          <h1>Usuarios</h1>
+          <p class="page-subtitle">Cuentas del sistema, roles y permisos</p>
+        </div>
+        <button type="button" class="btn btn-primary" id="btn-nuevo-usuario" data-modal-open="modal-usuario">
+          <span class="material-symbols-rounded">person_add</span> Nuevo usuario
+        </button>
+      </header>
+
+      <nav class="filter-bar" aria-label="Secciones">
+        <button class="filter-chip is-active" data-tab="usuarios">Usuarios</button>
+        <button class="filter-chip" data-tab="roles">Roles y permisos</button>
+      </nav>
+
+      <section id="panel-usuarios">
+        <div class="search-input-wrap" style="margin-bottom:var(--space-md)">
+          <span class="material-symbols-rounded">search</span>
+          <input type="search" class="form-control" placeholder="Buscar en esta página por nombre, cédula o correo..." aria-label="Buscar usuarios" id="search-usuarios">
+        </div>
+
+        <div class="table-responsive">
+          <table class="data-table" id="tabla-usuarios">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Cédula</th>
+                <th>Correo</th>
+                <th>Roles</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="tabla-usuarios-body"></tbody>
+          </table>
+        </div>
+
+        <div class="pagination">
+          <span>Mostrando 1–4 de 4 usuarios</span>
+          <div class="pagination-btns">
+            <button class="btn btn-outline btn-sm" disabled>Anterior</button>
+            <button class="btn btn-outline btn-sm" disabled>Siguiente</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="panel-roles" style="display:none">
+        <div class="flex-between" style="margin-bottom:var(--space-sm)">
+          <h2 style="font-size:var(--font-size-body)">Roles</h2>
+          <button type="button" class="btn btn-primary btn-sm" id="btn-nuevo-rol" data-modal-open="modal-rol">
+            <span class="material-symbols-rounded">add</span> Nuevo rol
+          </button>
+        </div>
+
+        <div id="lista-roles" style="display:flex;flex-direction:column;gap:var(--space-sm);margin-bottom:var(--space-xl)"></div>
+
+        <h2 style="font-size:var(--font-size-body);margin-bottom:var(--space-sm)">Catálogo de permisos</h2>
+        <div class="card" style="max-width:560px">
+          <form id="form-permiso" style="display:flex;gap:8px;margin-bottom:var(--space-md)">
+            <input type="text" id="nuevo-permiso" class="form-control" placeholder="Ej. reportes.exportar">
+            <button type="submit" class="btn btn-primary btn-sm" style="white-space:nowrap">Agregar</button>
+          </form>
+          <div id="lista-permisos" style="display:flex;flex-wrap:wrap;gap:8px"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <nav class="bottom-nav" aria-label="Navegación inferior">
+    <a href="dashboard.html" class="bottom-nav-item" aria-label="Inicio">
+      <span class="material-symbols-rounded">home</span>
+      Inicio
+    </a>
+    <a href="brigadas.html" class="bottom-nav-item" aria-label="Campañas">
+      <span class="material-symbols-rounded">groups</span>
+      Campañas
+    </a>
+    <div class="bottom-nav-spacer" aria-hidden="true"></div>
+    <a href="pacientes.html" class="bottom-nav-item" aria-label="Pacientes">
+      <span class="material-symbols-rounded">personal_injury</span>
+      Pacientes
+    </a>
+    <a href="noticias.html" class="bottom-nav-item" aria-label="Notificaciones">
+      <span class="material-symbols-rounded">notifications</span>
+      Alertas
+    </a>
+
+    <button class="bottom-nav-menu-btn" id="sidebar-toggle" aria-label="Abrir menú completo">
+      <span class="material-symbols-rounded">menu</span>
+    </button>
+  </nav>
+
+  <div class="modal-overlay" id="modal-usuario">
+    <div class="modal" role="dialog" style="max-width:480px">
+      <h2 class="modal-title">Nuevo usuario</h2>
+      <form id="form-usuario">
+        <div class="form-group">
+          <label class="form-label" for="u-nombre">Nombres y apellidos</label>
+          <input type="text" id="u-nombre" class="form-control" placeholder="Ej. Diego Salazar" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="u-cedula">Cédula</label>
+          <input type="text" id="u-cedula" class="form-control" inputmode="numeric" maxlength="10" placeholder="10 dígitos" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="u-correo">Correo</label>
+          <input type="email" id="u-correo" class="form-control" placeholder="usuario@brigadamedica.test" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="u-rol">Rol</label>
+          <select id="u-rol" class="form-control" required>
+            <option value="Coordinador">Coordinador</option>
+            <option value="Médico">Médico</option>
+            <option value="Brigadista">Brigadista</option>
+          </select>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-ghost" data-modal-close>Cancelar</button>
+          <button type="submit" class="btn btn-primary">Crear usuario</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modal-eliminar-usuario">
+    <div class="modal" role="dialog">
+      <h2 class="modal-title">Eliminar usuario</h2>
+      <div class="modal-body">
+        <p>¿Seguro que deseas eliminar a <strong id="eliminar-usuario-nombre"></strong>? Esta acción no se puede deshacer.</p>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-ghost" data-modal-close>Cancelar</button>
+        <button type="button" class="btn btn-primary" style="background:var(--color-error)" id="btn-confirmar-eliminar-usuario">Eliminar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modal-rol">
+    <div class="modal" role="dialog" style="max-width:480px">
+      <h2 class="modal-title" id="modal-rol-title">Nuevo rol</h2>
+      <form id="form-rol">
+        <div class="form-group">
+          <label class="form-label" for="rol-nombre">Nombre del rol</label>
+          <input type="text" id="rol-nombre" class="form-control" placeholder="Ej. Supervisor" required>
+        </div>
+        <div class="form-group">
+          <span class="form-label">Permisos</span>
+          <div id="rol-permisos-checks" style="display:flex;flex-direction:column;gap:6px;max-height:280px;overflow-y:auto"></div>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-ghost" data-modal-close>Cancelar</button>
+          <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modal-eliminar-rol">
+    <div class="modal" role="dialog">
+      <h2 class="modal-title">Eliminar rol</h2>
+      <div class="modal-body">
+        <p>¿Seguro que deseas eliminar el rol <strong id="eliminar-rol-nombre"></strong>? Los usuarios que lo tengan asignado lo perderán.</p>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-ghost" data-modal-close>Cancelar</button>
+        <button type="button" class="btn btn-primary" style="background:var(--color-error)" id="btn-confirmar-eliminar-rol">Eliminar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script>
+    setActiveNav('usuarios');
+
+    // --- Tabs ---
+    document.querySelectorAll('.filter-bar[aria-label="Secciones"] .filter-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        document.querySelectorAll('.filter-bar[aria-label="Secciones"] .filter-chip').forEach(c => c.classList.remove('is-active'));
+        chip.classList.add('is-active');
+        const tab = chip.dataset.tab;
+        document.getElementById('panel-usuarios').style.display = tab === 'usuarios' ? 'block' : 'none';
+        document.getElementById('panel-roles').style.display = tab === 'roles' ? 'block' : 'none';
+        document.getElementById('btn-nuevo-usuario').style.display = tab === 'usuarios' ? 'inline-flex' : 'none';
+      });
+    });
+
+    // --- Usuarios (demo) ---
+    const USUARIOS_DEMO = [
+      { id: 1, nombre: 'María Coordinadora', cedula: '0912345678', correo: 'coordinadora@brigadamedica.test', roles: ['Coordinador'], activo: true },
+      { id: 2, nombre: 'Dra. Rosa Pérez', cedula: '0923456789', correo: 'rosa.perez@brigadamedica.test', roles: ['Médico'], activo: true },
+      { id: 3, nombre: 'Pedro Vega', cedula: '0934567890', correo: 'pedro.vega@brigadamedica.test', roles: ['Brigadista'], activo: true },
+      { id: 4, nombre: 'Karen López', cedula: '0945678901', correo: 'karen.lopez@brigadamedica.test', roles: ['Brigadista'], activo: false },
+    ];
+
+    function pintarUsuarios() {
+      const cuerpo = document.getElementById('tabla-usuarios-body');
+      cuerpo.innerHTML = USUARIOS_DEMO.map(u => `
+        <tr>
+          <td data-label="Nombre"><strong>${u.nombre}</strong></td>
+          <td data-label="Cédula">${u.cedula}</td>
+          <td data-label="Correo">${u.correo}</td>
+          <td data-label="Roles">${u.roles.map(r => `<span class="chip chip-confirmado">${r}</span>`).join(' ')}</td>
+          <td data-label="Estado">
+            <button type="button" class="chip ${u.activo ? 'chip-atendido' : 'chip-espera'}" style="border:none;cursor:pointer" data-toggle-activo="${u.id}">
+              ${u.activo ? 'Activo' : 'Inactivo'}
+            </button>
+          </td>
+          <td data-label="Acciones">
+            <div style="display:flex;gap:8px">
+              <button type="button" class="btn btn-outline btn-sm" data-editar-usuario="${u.id}">Editar</button>
+              <button type="button" class="btn btn-outline btn-sm" data-eliminar-usuario="${u.id}">Eliminar</button>
+            </div>
+          </td>
+        </tr>`).join('');
+
+      cuerpo.querySelectorAll('[data-toggle-activo]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const usuario = USUARIOS_DEMO.find(u => u.id == btn.dataset.toggleActivo);
+          usuario.activo = !usuario.activo;
+          showToast(usuario.activo ? 'Usuario activado.' : 'Usuario desactivado.');
+          pintarUsuarios();
+        });
+      });
+
+      cuerpo.querySelectorAll('[data-editar-usuario]').forEach(btn => {
+        btn.addEventListener('click', () => showToast('Edición de usuario: solo disponible en el panel real.'));
+      });
+
+      cuerpo.querySelectorAll('[data-eliminar-usuario]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const usuario = USUARIOS_DEMO.find(u => u.id == btn.dataset.eliminarUsuario);
+          usuarioAEliminar = usuario.id;
+          document.getElementById('eliminar-usuario-nombre').textContent = usuario.nombre;
+          document.getElementById('modal-eliminar-usuario').classList.add('is-open');
+        });
+      });
+    }
+
+    let usuarioAEliminar = null;
+    document.getElementById('btn-confirmar-eliminar-usuario').addEventListener('click', () => {
+      const index = USUARIOS_DEMO.findIndex(u => u.id === usuarioAEliminar);
+      if (index > -1) USUARIOS_DEMO.splice(index, 1);
+      document.getElementById('modal-eliminar-usuario').classList.remove('is-open');
+      showToast('Usuario eliminado correctamente.');
+      pintarUsuarios();
+    });
+
+    document.getElementById('form-usuario').addEventListener('submit', function (e) {
+      e.preventDefault();
+      USUARIOS_DEMO.push({
+        id: Date.now(),
+        nombre: document.getElementById('u-nombre').value.trim(),
+        cedula: document.getElementById('u-cedula').value.trim(),
+        correo: document.getElementById('u-correo').value.trim(),
+        roles: [document.getElementById('u-rol').value],
+        activo: true,
+      });
+      document.getElementById('modal-usuario').classList.remove('is-open');
+      this.reset();
+      showToast('Usuario creado correctamente.');
+      pintarUsuarios();
+    });
+
+    document.getElementById('u-cedula').addEventListener('input', function () {
+      this.value = this.value.replace(/\D/g, '').slice(0, 10);
+    });
+
+    initTableSearch('#tabla-usuarios', '#search-usuarios');
+    pintarUsuarios();
+
+    // --- Roles y permisos (demo) ---
+    const ROLES_DEMO = [
+      { id: 1, nombre: 'Coordinador', permisos: ['brigadas.gestionar', 'pacientes.gestionar', 'usuarios.gestionar', 'reportes.ver'] },
+      { id: 2, nombre: 'Médico', permisos: ['pacientes.ver', 'turnos.atender'] },
+      { id: 3, nombre: 'Brigadista', permisos: ['turnos.registrar'] },
+    ];
+    const PERMISOS_DEMO = [
+      { id: 1, nombre: 'brigadas.gestionar' }, { id: 2, nombre: 'pacientes.gestionar' },
+      { id: 3, nombre: 'pacientes.ver' }, { id: 4, nombre: 'turnos.registrar' },
+      { id: 5, nombre: 'turnos.atender' }, { id: 6, nombre: 'usuarios.gestionar' },
+      { id: 7, nombre: 'reportes.ver' },
+    ];
+    let rolEditando = null;
+    let rolAEliminar = null;
+
+    function pintarRoles() {
+      const contenedor = document.getElementById('lista-roles');
+      if (!ROLES_DEMO.length) {
+        contenedor.innerHTML = '<p class="page-subtitle">Todavía no hay roles registrados.</p>';
+        return;
+      }
+      contenedor.innerHTML = ROLES_DEMO.map(r => `
+        <div class="card">
+          <div class="flex-between">
+            <strong>${r.nombre}</strong>
+            <div style="display:flex;gap:8px">
+              <button type="button" class="btn btn-outline btn-sm" data-editar-rol="${r.id}">Editar</button>
+              <button type="button" class="btn btn-outline btn-sm" data-eliminar-rol="${r.id}">Eliminar</button>
+            </div>
+          </div>
+          <p class="page-subtitle" style="margin-top:8px">
+            ${r.permisos.length} permiso${r.permisos.length === 1 ? '' : 's'}: ${r.permisos.join(', ') || 'ninguno'}
+          </p>
+        </div>`).join('');
+
+      contenedor.querySelectorAll('[data-editar-rol]').forEach(btn => {
+        btn.addEventListener('click', () => abrirModalRol(ROLES_DEMO.find(r => r.id == btn.dataset.editarRol)));
+      });
+      contenedor.querySelectorAll('[data-eliminar-rol]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const rol = ROLES_DEMO.find(r => r.id == btn.dataset.eliminarRol);
+          rolAEliminar = rol.id;
+          document.getElementById('eliminar-rol-nombre').textContent = rol.nombre;
+          document.getElementById('modal-eliminar-rol').classList.add('is-open');
+        });
+      });
+    }
+
+    function pintarChecksPermisos(seleccionados = []) {
+      const contenedor = document.getElementById('rol-permisos-checks');
+      contenedor.innerHTML = PERMISOS_DEMO.map(p => `
+        <label style="display:flex;align-items:center;gap:8px;font-size:var(--font-size-small);cursor:pointer">
+          <input type="checkbox" value="${p.nombre}" ${seleccionados.includes(p.nombre) ? 'checked' : ''}>
+          ${p.nombre}
+        </label>`).join('');
+    }
+
+    function abrirModalRol(rol = null) {
+      rolEditando = rol?.id ?? null;
+      document.getElementById('modal-rol-title').textContent = rol ? 'Editar rol' : 'Nuevo rol';
+      document.getElementById('rol-nombre').value = rol?.nombre ?? '';
+      pintarChecksPermisos(rol?.permisos ?? []);
+      document.getElementById('modal-rol').classList.add('is-open');
+    }
+
+    document.getElementById('btn-nuevo-rol').addEventListener('click', () => abrirModalRol());
+
+    document.getElementById('form-rol').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const permisosSeleccionados = [...document.querySelectorAll('#rol-permisos-checks input:checked')].map(c => c.value);
+      const nombre = document.getElementById('rol-nombre').value.trim();
+
+      if (rolEditando) {
+        const rol = ROLES_DEMO.find(r => r.id === rolEditando);
+        rol.nombre = nombre;
+        rol.permisos = permisosSeleccionados;
+      } else {
+        ROLES_DEMO.push({ id: Date.now(), nombre, permisos: permisosSeleccionados });
+      }
+
+      document.getElementById('modal-rol').classList.remove('is-open');
+      showToast(rolEditando ? 'Rol actualizado correctamente.' : 'Rol creado correctamente.');
+      pintarRoles();
+    });
+
+    document.getElementById('btn-confirmar-eliminar-rol').addEventListener('click', () => {
+      const index = ROLES_DEMO.findIndex(r => r.id === rolAEliminar);
+      if (index > -1) ROLES_DEMO.splice(index, 1);
+      document.getElementById('modal-eliminar-rol').classList.remove('is-open');
+      showToast('Rol eliminado correctamente.');
+      pintarRoles();
+    });
+
+    function pintarPermisos() {
+      const contenedor = document.getElementById('lista-permisos');
+      contenedor.innerHTML = PERMISOS_DEMO.map(p => `
+        <span class="chip chip-confirmado" style="display:inline-flex;align-items:center;gap:6px">
+          ${p.nombre}
+          <button type="button" data-eliminar-permiso="${p.id}" aria-label="Eliminar permiso" style="background:none;border:none;cursor:pointer;color:inherit;display:flex">
+            <span class="material-symbols-rounded" style="font-size:14px">close</span>
+          </button>
+        </span>`).join('');
+
+      contenedor.querySelectorAll('[data-eliminar-permiso]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const index = PERMISOS_DEMO.findIndex(p => p.id == btn.dataset.eliminarPermiso);
+          if (index > -1) PERMISOS_DEMO.splice(index, 1);
+          showToast('Permiso eliminado correctamente.');
+          pintarPermisos();
+        });
+      });
+    }
+
+    document.getElementById('form-permiso').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const input = document.getElementById('nuevo-permiso');
+      const nombre = input.value.trim();
+      if (!nombre) return;
+      PERMISOS_DEMO.push({ id: Date.now(), nombre });
+      input.value = '';
+      showToast('Permiso agregado correctamente.');
+      pintarPermisos();
+    });
+
+    pintarRoles();
+    pintarPermisos();
+  </script>
+</body>
+</html>

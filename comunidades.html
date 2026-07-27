@@ -3,23 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BrigadaSalud — Comunidades</title>
+  <title>BrigadaMedica — Comunidades</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body class="app-layout">
 
   <aside class="sidebar" id="sidebar">
-    <div class="sidebar-brand"><span class="material-symbols-rounded">medical_services</span> BrigadaSalud</div>
-    <nav class="sidebar-nav">
+    <div class="sidebar-brand"><span class="material-symbols-rounded">medical_services</span> BrigadaMedica</div>
+    <nav class="sidebar-nav" aria-label="Navegación principal">
       <a href="dashboard.html" class="sidebar-link" data-page="dashboard"><span class="material-symbols-rounded">home</span> Dashboard</a>
-      <a href="brigadas.html" class="sidebar-link" data-page="brigadas"><span class="material-symbols-rounded">groups</span> Brigadas</a>
-      <a href="pacientes.html" class="sidebar-link" data-page="pacientes"><span class="material-symbols-rounded">personal_injury</span> Pacientes</a>
-      <a href="medicos.html" class="sidebar-link" data-page="medicos"><span class="material-symbols-rounded">stethoscope</span> Médicos</a>
-      <a href="brigadistas.html" class="sidebar-link" data-page="brigadistas"><span class="material-symbols-rounded">volunteer_activism</span> Brigadistas</a>
-      <a href="comunidades.html" class="sidebar-link is-active" data-page="comunidades"><span class="material-symbols-rounded">location_city</span> Comunidades</a>
-      <a href="reportes.html" class="sidebar-link" data-page="reportes"><span class="material-symbols-rounded">bar_chart</span> Reportes</a>
-      <a href="noticias.html" class="sidebar-link" data-page="noticias"><span class="material-symbols-rounded">newspaper</span> Noticias</a>
-      <a href="configuracion.html" class="sidebar-link" data-page="configuracion"><span class="material-symbols-rounded">settings</span> Configuración</a>
+
+      <div class="sidebar-section">
+        <div class="sidebar-section-label">Operación</div>
+        <a href="brigadas.html" class="sidebar-link" data-page="brigadas"><span class="material-symbols-rounded">groups</span> Campañas</a>
+        <a href="pacientes.html" class="sidebar-link" data-page="pacientes"><span class="material-symbols-rounded">personal_injury</span> Pacientes</a>
+        <a href="medicos.html" class="sidebar-link" data-page="medicos"><span class="material-symbols-rounded">stethoscope</span> Médicos</a>
+        <a href="brigadistas.html" class="sidebar-link" data-page="brigadistas"><span class="material-symbols-rounded">volunteer_activism</span> Brigadistas</a>
+        <a href="comunidades.html" class="sidebar-link is-active" data-page="comunidades"><span class="material-symbols-rounded">location_city</span> Comunidades</a>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-section-label">Análisis</div>
+        <a href="reportes.html" class="sidebar-link" data-page="reportes"><span class="material-symbols-rounded">bar_chart</span> Reportes</a>
+        <a href="noticias.html" class="sidebar-link" data-page="noticias"><span class="material-symbols-rounded">newspaper</span> Noticias</a>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-section-label">Administración</div>
+        <a href="usuarios.html" class="sidebar-link" data-page="usuarios"><span class="material-symbols-rounded">manage_accounts</span> Usuarios</a>
+        <a href="configuracion.html" class="sidebar-link" data-page="configuracion"><span class="material-symbols-rounded">settings</span> Configuración</a>
+      </div>
     </nav>
     <div class="sidebar-footer">
       <a href="login.html" class="sidebar-link sidebar-link--logout"><span class="material-symbols-rounded">logout</span> Cerrar sesión</a>
@@ -29,66 +42,239 @@
 
   <div class="app-main">
     <header class="topbar">
-      <button class="topbar-toggle icon-btn" id="sidebar-toggle" aria-label="Abrir menú"><span class="material-symbols-rounded">menu</span></button>
-      <div class="topbar-search"><span class="material-symbols-rounded">search</span><input type="search" placeholder="Buscar sectores..." aria-label="Buscar"></div>
+      <div class="topbar-search" id="global-search">
+        <span class="material-symbols-rounded">search</span>
+        <input type="search" id="global-search-input" placeholder="Buscar pacientes, campañas, médicos..." aria-label="Buscar" autocomplete="off">
+        <div class="global-search-results" id="global-search-results"></div>
+      </div>
       <div class="topbar-actions">
-        <div class="connection-status connection-status--online"><span class="connection-dot"></span> Sincronizado</div>
-        <button class="icon-btn" aria-label="Notificaciones"><span class="material-symbols-rounded">notifications</span></button>
-        <div class="avatar avatar-sm">MC</div>
+        <div class="connection-status connection-status--online" id="connection-badge" aria-live="polite">
+          <span class="connection-dot"></span> <span id="connection-text">Sincronizado</span>
+        </div>
+        <button class="icon-btn" aria-label="Notificaciones (3 pendientes)">
+          <span class="material-symbols-rounded">notifications</span>
+          <span class="badge-count">3</span>
+        </button>
+
+        <div class="user-menu" id="user-menu">
+          <button class="user-menu-trigger" id="user-menu-trigger" aria-haspopup="true" aria-expanded="false" aria-label="Abrir menú de usuario">
+            <div class="avatar avatar-sm">MC</div>
+            <span class="material-symbols-rounded user-menu-caret">expand_more</span>
+          </button>
+          <div class="user-menu-dropdown">
+            <div class="user-menu-header">
+              <div class="avatar avatar-md">MC</div>
+              <div class="user-menu-identity">
+                <strong>María Coordinadora</strong>
+                <span>coordinadora@brigadamedica.test</span>
+                <div class="user-menu-roles"><span class="chip chip-confirmado">Coordinador</span></div>
+              </div>
+            </div>
+            <div class="user-menu-divider"></div>
+            <a href="configuracion.html" class="user-menu-item">
+              <span class="material-symbols-rounded">person</span> Ver mi perfil
+            </a>
+            <div class="user-menu-divider"></div>
+            <a href="login.html" class="user-menu-item user-menu-item--danger">
+              <span class="material-symbols-rounded">logout</span> Cerrar sesión
+            </a>
+          </div>
+        </div>
       </div>
     </header>
 
     <main class="page-content">
-      <header class="page-header">
-        <h1>Comunidades</h1>
-        <p class="page-subtitle">Barrios y sectores atendidos por las brigadas</p>
+      <header class="page-header flex-between">
+        <div>
+          <h1>Comunidades</h1>
+          <p class="page-subtitle">Catálogo de sectores y comunidades atendidas</p>
+        </div>
+        <button type="button" class="btn btn-primary" id="btn-nueva-comunidad" data-modal-open="modal-comunidad">
+          <span class="material-symbols-rounded">add</span> Nueva comunidad
+        </button>
       </header>
 
-      <div class="grid-2">
-        <div class="card">
-          <h2 class="section-title">Mapa de sectores</h2>
-          <div class="map-placeholder">
-            <span class="material-symbols-rounded" style="font-size:48px;opacity:0.4;margin-right:8px">map</span>
-            Vista de mapa — Guayaquil Norte
-          </div>
-        </div>
+      <div class="search-input-wrap" style="margin-bottom:var(--space-md)">
+        <span class="material-symbols-rounded">search</span>
+        <input type="search" class="form-control" placeholder="Buscar en esta página por nombre o sector..." aria-label="Buscar comunidades" id="search-comunidades">
+      </div>
 
-        <div class="card">
-          <h2 class="section-title">Catálogo de sectores</h2>
-          <div class="comunidad-item">
-            <div>
-              <strong>Entrada de la 8</strong>
-              <p style="font-size:var(--font-size-caption);color:var(--color-text-muted)">12 brigadas · 486 atenciones</p>
-            </div>
-            <a href="reportes.html" class="btn btn-ghost btn-sm">Ver histórico</a>
-          </div>
-          <div class="comunidad-item">
-            <div>
-              <strong>Bastión Popular</strong>
-              <p style="font-size:var(--font-size-caption);color:var(--color-text-muted)">8 brigadas · 312 atenciones</p>
-            </div>
-            <a href="reportes.html" class="btn btn-ghost btn-sm">Ver histórico</a>
-          </div>
-          <div class="comunidad-item">
-            <div>
-              <strong>Flor de Bastión</strong>
-              <p style="font-size:var(--font-size-caption);color:var(--color-text-muted)">5 brigadas · 198 atenciones</p>
-            </div>
-            <a href="reportes.html" class="btn btn-ghost btn-sm">Ver histórico</a>
-          </div>
-          <div class="comunidad-item">
-            <div>
-              <strong>Cooperativa Balerio Estacio</strong>
-              <p style="font-size:var(--font-size-caption);color:var(--color-text-muted)">6 brigadas · 252 atenciones</p>
-            </div>
-            <a href="reportes.html" class="btn btn-ghost btn-sm">Ver histórico</a>
-          </div>
+      <div class="table-responsive">
+        <table class="data-table" id="tabla-comunidades">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Sector</th>
+              <th>Referencia de ubicación</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="tabla-comunidades-body"></tbody>
+        </table>
+      </div>
+
+      <div class="pagination">
+        <span>Mostrando 1–4 de 4 comunidades</span>
+        <div class="pagination-btns">
+          <button class="btn btn-outline btn-sm" disabled>Anterior</button>
+          <button class="btn btn-outline btn-sm" disabled>Siguiente</button>
         </div>
       </div>
     </main>
   </div>
 
+  <nav class="bottom-nav" aria-label="Navegación inferior">
+    <a href="dashboard.html" class="bottom-nav-item" aria-label="Inicio">
+      <span class="material-symbols-rounded">home</span>
+      Inicio
+    </a>
+    <a href="brigadas.html" class="bottom-nav-item" aria-label="Campañas">
+      <span class="material-symbols-rounded">groups</span>
+      Campañas
+    </a>
+    <div class="bottom-nav-spacer" aria-hidden="true"></div>
+    <a href="pacientes.html" class="bottom-nav-item" aria-label="Pacientes">
+      <span class="material-symbols-rounded">personal_injury</span>
+      Pacientes
+    </a>
+    <a href="noticias.html" class="bottom-nav-item" aria-label="Notificaciones">
+      <span class="material-symbols-rounded">notifications</span>
+      Alertas
+    </a>
+
+    <button class="bottom-nav-menu-btn" id="sidebar-toggle" aria-label="Abrir menú completo">
+      <span class="material-symbols-rounded">menu</span>
+    </button>
+  </nav>
+
+  <div class="modal-overlay" id="modal-comunidad">
+    <div class="modal" role="dialog" style="max-width:480px">
+      <h2 class="modal-title" id="modal-comunidad-title">Nueva comunidad</h2>
+      <form id="form-comunidad">
+        <div class="form-group">
+          <label class="form-label" for="c-nombre">Nombre</label>
+          <input type="text" id="c-nombre" class="form-control" placeholder="Ej. Bastión Popular Bloque 5" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="c-sector">Sector</label>
+          <input type="text" id="c-sector" class="form-control" placeholder="Ej. Suburbio Oeste" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="c-referencia">Referencia de ubicación (opcional)</label>
+          <input type="text" id="c-referencia" class="form-control" placeholder="Ej. Junto a la iglesia central">
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-ghost" data-modal-close>Cancelar</button>
+          <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modal-eliminar">
+    <div class="modal" role="dialog">
+      <h2 class="modal-title">Eliminar comunidad</h2>
+      <div class="modal-body">
+        <p>¿Seguro que deseas eliminar <strong id="eliminar-nombre"></strong>? Esta acción no se puede deshacer.</p>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-ghost" data-modal-close>Cancelar</button>
+        <button type="button" class="btn btn-primary" style="background:var(--color-error)" id="btn-confirmar-eliminar">Eliminar</button>
+      </div>
+    </div>
+  </div>
+
   <script src="js/app.js"></script>
-  <script>setActiveNav('comunidades');</script>
+  <script>
+    setActiveNav('comunidades');
+
+    const COMUNIDADES_DEMO = [
+      { id: 1, nombre: 'Entrada de la 8', sector: 'Guayaquil Norte', referencia: 'Junto al parque central' },
+      { id: 2, nombre: 'Bastión Popular', sector: 'Guayaquil Norte', referencia: 'Frente a la cooperativa' },
+      { id: 3, nombre: 'Flor de Bastión', sector: 'Guayaquil Norte', referencia: 'Bloque 3' },
+      { id: 4, nombre: 'Cooperativa Balerio Estacio', sector: 'Guayaquil Norte', referencia: null },
+    ];
+    let comunidadEditando = null;
+    let comunidadAEliminar = null;
+
+    function pintarComunidades() {
+      const cuerpo = document.getElementById('tabla-comunidades-body');
+      cuerpo.innerHTML = COMUNIDADES_DEMO.map(c => `
+        <tr>
+          <td data-label="Nombre"><strong>${c.nombre}</strong></td>
+          <td data-label="Sector">${c.sector}</td>
+          <td data-label="Referencia">${c.referencia ?? '—'}</td>
+          <td data-label="Acciones">
+            <div style="display:flex;gap:8px">
+              <button type="button" class="btn btn-outline btn-sm" data-editar="${c.id}">Editar</button>
+              <button type="button" class="btn btn-outline btn-sm" data-eliminar="${c.id}">Eliminar</button>
+            </div>
+          </td>
+        </tr>`).join('');
+
+      cuerpo.querySelectorAll('[data-editar]').forEach(btn => {
+        btn.addEventListener('click', () => abrirModalEditar(parseInt(btn.dataset.editar, 10)));
+      });
+      cuerpo.querySelectorAll('[data-eliminar]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const comunidad = COMUNIDADES_DEMO.find(c => c.id === parseInt(btn.dataset.eliminar, 10));
+          comunidadAEliminar = comunidad.id;
+          document.getElementById('eliminar-nombre').textContent = comunidad.nombre;
+          document.getElementById('modal-eliminar').classList.add('is-open');
+        });
+      });
+    }
+
+    function limpiarFormulario() {
+      document.getElementById('form-comunidad').reset();
+      comunidadEditando = null;
+    }
+
+    document.getElementById('btn-nueva-comunidad').addEventListener('click', () => {
+      limpiarFormulario();
+      document.getElementById('modal-comunidad-title').textContent = 'Nueva comunidad';
+    });
+
+    function abrirModalEditar(id) {
+      limpiarFormulario();
+      const comunidad = COMUNIDADES_DEMO.find(c => c.id === id);
+      comunidadEditando = comunidad.id;
+      document.getElementById('modal-comunidad-title').textContent = 'Editar comunidad';
+      document.getElementById('c-nombre').value = comunidad.nombre;
+      document.getElementById('c-sector').value = comunidad.sector;
+      document.getElementById('c-referencia').value = comunidad.referencia ?? '';
+      document.getElementById('modal-comunidad').classList.add('is-open');
+    }
+
+    document.getElementById('form-comunidad').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const datos = {
+        nombre: document.getElementById('c-nombre').value.trim(),
+        sector: document.getElementById('c-sector').value.trim(),
+        referencia: document.getElementById('c-referencia').value.trim() || null,
+      };
+
+      if (comunidadEditando) {
+        Object.assign(COMUNIDADES_DEMO.find(c => c.id === comunidadEditando), datos);
+      } else {
+        COMUNIDADES_DEMO.push({ id: Date.now(), ...datos });
+      }
+
+      document.getElementById('modal-comunidad').classList.remove('is-open');
+      showToast(comunidadEditando ? 'Comunidad actualizada correctamente.' : 'Comunidad creada correctamente.');
+      pintarComunidades();
+    });
+
+    document.getElementById('btn-confirmar-eliminar').addEventListener('click', () => {
+      const index = COMUNIDADES_DEMO.findIndex(c => c.id === comunidadAEliminar);
+      if (index > -1) COMUNIDADES_DEMO.splice(index, 1);
+      document.getElementById('modal-eliminar').classList.remove('is-open');
+      showToast('Comunidad eliminada correctamente.');
+      pintarComunidades();
+    });
+
+    initTableSearch('#tabla-comunidades', '#search-comunidades');
+    pintarComunidades();
+  </script>
 </body>
 </html>
